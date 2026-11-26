@@ -105,8 +105,8 @@ p { margin: 0 0 14px; }
 .step-body > p { color: var(--ink); }
 
 /* コピーするブロック */
-.prompt { margin: 18px 0 16px; background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
-.prompt figcaption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 18px; background: #f4f4ee; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
+.prompt { margin: 18px 0 16px; background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--radius); }
+.prompt figcaption { border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 18px; background: #f4f4ee; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
 .prompt .text { margin: 0; padding: 18px 20px; font-size: 19px; line-height: 1.85; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 pre.text { white-space: pre-wrap; font-family: var(--font); user-select: text; -webkit-user-select: text; max-height: 380px; overflow: auto; }
 .prompt.compact { margin: 10px 0; display: grid; grid-template-columns: 1fr auto; align-items: center; }
@@ -132,19 +132,21 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin: 14px 0; }
 .copy.wide { margin: 8px 0 0; }
-/* 前へ・次へのボタンに付ける、キーの札（←→で動けることを示す） */
+/* 前へ・次へのボタンに付ける、キーの札（←→で動けることを示す）。狭い画面では、ボタンの文字が折れるので隠す */
 .key { display: inline-block; min-width: 1.9em; padding: 0 6px; border: 1.5px solid currentColor; border-radius: 5px; font-family: inherit; font-size: 14px; font-weight: 700; line-height: 1.5; text-align: center; }
+@media (max-width: 520px) { .key { display: none; } }
 
 /* 確かめる一文 */
 .look { display: block; margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); font-weight: 700; line-height: 1.7; }
 /* 確認ポイント。資料（スライド）の「確認」の印と同じ、緑の丸い札 */
 .look::before { content: "確認"; display: inline-block; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 12px; margin-right: 12px; vertical-align: 2px; }
 
-/* 画面が変わったとき、押すものの周りに太い枠線を出し、次の画面に移るまで脈打たせる */
-.is-spotlight { outline: 3px solid var(--accent); outline-offset: 4px; animation: spotlight 7s ease-in-out infinite; }
+/* 画面が変わったとき、押すものの周りに太い枠線を出し、次の画面に移るまで脈打たせる。
+   外に出る幅は、枠線の太さ3pxとあわせて最大6px。まわりの余白（最小6px）から出ない */
+.is-spotlight { outline: 3px solid var(--accent); outline-offset: 0; animation: spotlight 7s ease-in-out infinite; }
 @keyframes spotlight {
-  0%, 100% { outline-color: var(--accent); outline-offset: 4px; box-shadow: 0 0 0 0 rgba(63, 107, 15, 0.35); }
-  50% { outline-color: rgba(63, 107, 15, 0.35); outline-offset: 12px; box-shadow: 0 0 0 10px rgba(63, 107, 15, 0); }
+  0%, 100% { outline-color: var(--accent); outline-offset: 0; }
+  50% { outline-color: rgba(63, 107, 15, 0.35); outline-offset: 3px; }
 }
 
 .next { margin: 18px 0 0; font-size: 15px; }

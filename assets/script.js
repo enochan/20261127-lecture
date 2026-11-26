@@ -209,13 +209,11 @@
     //   はじめ（ワーク2）: 「はじめる」
     //   ダウンロードのステップ: ダウンロードのボタンを押す → 次へ
     //   貼るステップ: コピーのボタンを押して成功する（複数あれば全部を示す）→ 次へ
-    //   確かめるステップ: 確認ポイントを示す → 8秒たったら次へ
+    //   確かめるステップ: 次へ（確認ポイントはボタンではないので光らせない）
     //   完了: 次の案内のボタン、なければ「時間が余った人へ」の欄
     var spotEls = [];
     var flow = [];
     var flowAt = 0;
-    var flowTimer = null;
-    var LOOK_WAIT = 8000;
 
     function visible(el) { return !!el && !el.hidden && el.getClientRects().length > 0; }
 
@@ -234,12 +232,8 @@
     }
 
     function showStage() {
-      window.clearTimeout(flowTimer);
       var stage = flow[flowAt];
       setSpots(stage ? stage.els : []);
-      if (stage && stage.on === 'wait' && flow[flowAt + 1]) {
-        flowTimer = window.setTimeout(advance, LOOK_WAIT);
-      }
     }
 
     function advance() {
@@ -253,7 +247,6 @@
       var links = pick(panel, '.btn-row .btn');
       var downloads = pick(panel, 'a[download]');
       var copies = pick(panel, '[data-copy]');
-      var looks = pick(panel, '.look');
 
       if (intro) {
         if (links.length) { stages.push({ els: links, on: 'click' }); }
@@ -268,8 +261,6 @@
         stages.push({ els: downloads, on: 'click' });
       } else if (copies.length) {
         stages.push({ els: copies, on: 'copy' });
-      } else if (looks.length) {
-        stages.push({ els: looks, on: 'wait' });
       }
       if (!isDone && !nextBtn.hidden) { stages.push({ els: [nextBtn], on: 'end' }); }
 
