@@ -46,7 +46,7 @@ a:hover { color: var(--accent); }
 
 /* ヘッダー */
 .top { background: var(--bg); border-bottom: 1px solid var(--line); }
-.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 8px 24px; flex-wrap: wrap; min-height: 56px; padding-top: 6px; padding-bottom: 6px; }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 4px 24px; flex-wrap: wrap; min-height: 44px; padding-top: 4px; padding-bottom: 4px; }
 .logo { font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: 0.01em; display: inline-flex; align-items: center; gap: 10px; }
 .logo::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
 .top nav { display: flex; gap: 2px; flex-wrap: wrap; }
@@ -120,6 +120,10 @@ p { margin: 0 0 14px; }
 .prompt .text { margin: 0; padding: 18px 20px; font-size: 19px; line-height: 1.85; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
 pre.text { white-space: pre-wrap; font-family: var(--font); user-select: text; -webkit-user-select: text; max-height: 380px; overflow: auto; }
 .prompt.compact { margin: 10px 0; display: grid; grid-template-columns: 1fr auto; align-items: center; }
+.prompt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
+.prompt-grid .prompt.compact { margin: 6px 0; }
+html.js-steps .prompt-grid .prompt.compact .text { font-size: 15px; line-height: 1.6; padding: 8px 12px; }
+html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-size: 14px; }
 .prompt.compact .text { padding: 12px 20px; }
 .prompt.compact .copy { margin: 0 10px 0 0; }
 
@@ -195,7 +199,7 @@ code { font-family: var(--mono); font-size: 0.92em; background: #efefe8; border:
 .toast.is-on { opacity: 1; transform: translate(-50%, 0); }
 
 .foot { border-top: 1px solid var(--line); padding: 20px 0 48px; color: var(--muted); font-size: 14px; line-height: 1.7; }
-.foot .copyright { margin: 0; text-align: center; font-size: 13px; letter-spacing: 0.04em; }
+.foot .copyright { margin: 0; text-align: center; font-size: 13px; line-height: 1.5; letter-spacing: 0.04em; }
 .foot p { margin: 0 0 4px; }
 
 
@@ -231,8 +235,8 @@ main.home { padding: 14px 0 40px; }
 
 .stepbar { display: none; }
 .js-steps .stepbar { display: block; flex: none; background: var(--bg); border-top: 1px solid var(--line-strong); }
-.stepbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 10px; padding-bottom: 10px; }
-.stepbar .btn { min-height: 52px; padding: 8px 22px; font-size: 18px; }
+.stepbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 8px; padding-bottom: 8px; }
+.stepbar .btn { min-height: 48px; padding: 8px 22px; font-size: 18px; }
 .stepbar .btn--go { margin-left: auto; }
 
 .js-steps .step { display: none; border-top: 1px solid var(--ink); }
@@ -250,8 +254,10 @@ html.js-steps .stepnav { position: static; }
 html.js-steps .stepnav .wrap { padding-top: 2px; padding-bottom: 2px; }
 html.js-steps .stepnav a { height: 36px; min-width: 36px; font-size: 15px; }
 html.js-steps main { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 0; }
-html.js-steps main > .wrap { padding-top: 12px; padding-bottom: 14px; }
-html.js-steps .foot { flex: none; padding: 6px 0; border-top: 1px solid var(--line); }`nhtml.js-steps .foot .wrap { padding-top: 0; padding-bottom: 0; }`nhtml.js-steps .foot-info { display: none; }
+html.js-steps main > .wrap { padding-top: 12px; padding-bottom: 8px; }
+html.js-steps .foot { flex: none; padding: 4px 0; border-top: 1px solid var(--line); }
+html.js-steps .foot .wrap { padding-top: 0; padding-bottom: 0; }
+html.js-steps .foot-info { display: none; }
 html.js-steps .toast { bottom: 84px; }
 
 html.js-steps .eyebrow { margin-bottom: 2px; font-size: 14px; line-height: 1.4; }
@@ -260,7 +266,7 @@ html.js-steps .lead { font-size: 17px; line-height: 1.7; margin-bottom: 10px; }
 html.js-steps .notice { margin-bottom: 10px; padding: 10px 16px; }
 html.js-steps .notice strong { font-size: 16px; margin-bottom: 0; }
 html.js-steps .notice p { font-size: 15px; line-height: 1.6; }
-html.js-steps .btn-row { margin: 8px 0; }
+html.js-steps .btn-row { margin: 6px 0; }
 html.js-steps .note { font-size: 15px; line-height: 1.6; margin-bottom: 4px; }
 html.js-steps .step { padding: 14px 0 0; grid-template-columns: 56px 1fr; gap: 0 16px; }
 html.js-steps .step--intro { padding-top: 0; }
@@ -310,6 +316,7 @@ html.js-steps .finish h2 { font-size: 22px; }
   .rows li { grid-template-columns: 1fr; }
   .prompt .text { padding: 14px 16px; font-size: 18px; }
   .prompt.compact { grid-template-columns: 1fr; }
+  .prompt-grid { grid-template-columns: 1fr; }
   .prompt.compact .copy { margin: 0 12px 12px; }
   .btn, .copy.wide { width: 100%; }
   .files li { grid-template-columns: 1fr; }
