@@ -186,14 +186,16 @@
         <div class="step-body">
           <h2 id="m3-t"><span class="sr">ステップ3　</span>足りない点は md に足す</h2>
           <p>出てきた文のうち、直したいところを探します。たとえば、長すぎる文や、ファイルと違う言葉づかいです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
-          <p>次の1行を足したファイルを用意しています。先ほどのファイルの代わりに、これを付けます。</p>
-          <ul class="files">
-            <li><div><b>1行を足した事業所メモ（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_20字.md">ダウンロード</a></li>
-          </ul>
+          <p>ステップ1でダウンロードしたファイルに、次の1行を足します。</p>
           <figure class="prompt">
-            <figcaption>ファイルに足した1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
+            <figcaption>ファイルに足す1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
             <p class="text" id="add1">- 1文は20字まで</p>
           </figure>
+          <ol class="plain">
+            <li>ファイルを右クリックして、「プログラムから開く」の「メモ帳」で開きます。</li>
+            <li>いちばん下に、コピーした1行を貼り付けます。</li>
+            <li>上書き保存して、AIのチャットにファイルを付け直し、ステップ2と同じ問いを送ります。</li>
+          </ol>
           <p class="look">同じ問いで、文が短くなったかを見ます。</p>
           <p class="next"><a href="#m4">つぎのステップへ</a></p>
         </div>
@@ -203,9 +205,9 @@
         <div class="step-side"><span class="num" aria-hidden="true">04</span><span class="kind">足す</span></div>
         <div class="step-body">
           <h2 id="m4-t"><span class="sr">ステップ4　</span>自分で1行足してみる</h2>
-          <p>ステップ3では、決まった1行を足しました。今度は、<strong>自分で足したい1行</strong>を考えて、ファイルに足します。</p>
+          <p>ステップ3では、決まった1行を足しました。今度は、<strong>自分で足したい1行</strong>を考えて、同じファイルに足します。</p>
           <ol class="plain">
-            <li>ダウンロードしたファイルを右クリックして、「プログラムから開く」の「メモ帳」で開きます。</li>
+            <li>ステップ3と同じように、ファイルをメモ帳で開きます。</li>
             <li>いちばん下に、<code>-</code> と半角の空白に続けて、足したい1行を書きます。</li>
             <li>上書き保存して、AIのチャットにファイルを付け直し、ステップ2と同じ問いを送ります。</li>
           </ol>
