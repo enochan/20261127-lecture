@@ -7,8 +7,8 @@
 <title>ワーク1 取引先へのお願いメール｜福祉事業所のAI導入と活用セミナー</title>
 <meta name="description" content="同じチャットで、取引先へのお願いメールを少しずつ育てるワークの文章をコピーできます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=10">
-<link rel="stylesheet" href="assets/style.css?v=10">
+<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=15">
+<link rel="stylesheet" href="assets/style.css?v=16">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -28,6 +28,7 @@
   <div class="wrap">
     <span class="label">STEP</span>
     <ol>
+      <li><a href="#start" aria-label="はじめ">はじめ</a></li>
       <li><a href="#s1" aria-label="ステップ1">1</a></li>
       <li><a href="#s2" aria-label="ステップ2">2</a></li>
       <li><a href="#s3" aria-label="ステップ3">3</a></li>
@@ -46,8 +47,11 @@
 
 <main id="main">
   <div class="wrap">
-    <p class="eyebrow">ワーク1</p>
-    <h1>取引先への<br>お願いメール</h1>
+    <div class="steps">
+      <section class="step step--intro" id="start" aria-label="はじめ">
+        <div class="step-body">
+          <p class="eyebrow">ワーク1</p>
+    <h1>取引先へのお願いメール</h1>
     <p class="lead">袋詰め作業（作業A）の納品日を、取引先に1週間ずらしてもらうメールを、AIと一緒に育てます。</p>
 
     <div class="notice" role="note">
@@ -60,9 +64,9 @@
       <a class="btn btn--ghost btn--go" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini を開く（新しいタブ）</a>
     </div>
     <p class="note">ふだん使っている ChatGPT や Claude でも、同じようにできます。</p>
-    <p class="note">ステップは1つずつ表示されます。終わったら、下の「次のステップへ」を押します。「貼る」はコピーしてAIに送るもの、「確かめる」は見て自分で考えるものです。</p>
-
-    <div class="steps">
+    <p class="note">下の「次のステップへ」で進みます。「貼る」はコピーしてAIに送るもの、「確かめる」は自分で考えるものです。</p>
+        </div>
+      </section>
 
       <section class="step" id="s1" aria-labelledby="s1-t">
         <div class="step-side"><span class="num" aria-hidden="true">01</span><span class="kind">貼る</span></div>
@@ -246,6 +250,6 @@
 
 <div id="live" class="sr" aria-live="polite" role="status"></div>
 <div id="toast" class="toast" aria-hidden="true"></div>
-<script src="assets/script.js?v=10"></script>
+<script src="assets/script.js?v=15"></script>
 </body>
 </html>

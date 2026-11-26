@@ -94,90 +94,50 @@
     });
   });
 
-  // ステップを1つずつ表示する（JavaScript が使えないときは、全部を縦に並べたままにする）
-  var panels = Array.prototype.slice.call(document.querySelectorAll('.steps > .step'));
+  // ステップを1つずつ表示する。画面全体はスクロールさせず、本文の欄の中だけを動かす。
+  // JavaScript が使えないときは、全部を縦に並べたままにする。
+  var steps = Array.prototype.slice.call(document.querySelectorAll('.steps > .step'));
   var doneEl = document.getElementById('done');
-  var stepCount = panels.length;
+  var panels = steps.slice();
   if (doneEl) { panels.push(doneEl); }
+  var numbered = steps.filter(function (p) { return !p.classList.contains('step--intro'); });
 
-  if (stepCount > 1) {
+  if (numbered.length > 1) {
     document.documentElement.classList.add('js-steps');
 
+    var main = document.getElementById('main');
     var stepnav = document.querySelector('.stepnav');
     var navList = document.querySelector('.stepnav ol');
     var pills = Array.prototype.slice.call(document.querySelectorAll('.stepnav ol a'));
     var label = document.querySelector('.stepnav .label');
-    var bar = null;
-    if (stepnav) {
-      var track = document.createElement('div');
-      track.className = 'progress';
-      track.setAttribute('aria-hidden', 'true');
-      bar = document.createElement('span');
-      track.appendChild(bar);
-      stepnav.appendChild(track);
-    }
+    var firstNumbered = panels.indexOf(numbered[0]);
+    var lastNumbered = panels.indexOf(numbered[numbered.length - 1]);
+    var stepCount = numbered.length;
 
-    function indexFromHash() {
-      var h = decodeURIComponent(location.hash.replace(/^#/, ''));
-      if (h === 'more') { h = 'done'; }
-      for (var i = 0; i < panels.length; i++) {
-        if (panels[i].id === h) { return i; }
-      }
-      return 0;
-    }
+    var track = document.createElement('div');
+    track.className = 'progress';
+    track.setAttribute('aria-hidden', 'true');
+    var bar = document.createElement('span');
+    track.appendChild(bar);
+    if (stepnav) { stepnav.appendChild(track); }
 
-    function addButtons(panel, i) {
-      var holder = panel.querySelector('.step-body') || panel;
-      var row = document.createElement('div');
-      row.className = 'step-nav';
-      if (i > 0) {
-        var back = document.createElement('button');
-        back.type = 'button';
-        back.className = 'btn btn--ghost btn--back';
-        back.textContent = '前のステップ';
-        back.addEventListener('click', function () { location.hash = panels[i - 1].id; });
-        row.appendChild(back);
-      }
-      if (i < panels.length - 1) {
-        var next = document.createElement('button');
-        next.type = 'button';
-        next.className = 'btn btn--go';
-        next.textContent = (i === stepCount - 1) ? '完了へ' : '次のステップへ';
-        next.addEventListener('click', function () { location.hash = panels[i + 1].id; });
-        row.appendChild(next);
-      }
-      holder.appendChild(row);
-    }
-    panels.forEach(addButtons);
-
-    var current = -1;
-    function show(i, userMove) {
-      current = i;
-      panels.forEach(function (p, k) { p.classList.toggle('is-current', k === i); });
-      pills.forEach(function (a) {
-        var k = indexFromId(a.getAttribute('href').slice(1));
-        a.classList.toggle('is-visited', k > -1 && k < i);
-        if (k === i) { a.setAttribute('aria-current', 'step'); } else { a.removeAttribute('aria-current'); }
-        if (k === i && navList) { navList.scrollLeft = a.offsetLeft - navList.clientWidth / 2 + a.clientWidth / 2; }
-      });
-      var onDone = (i >= stepCount);
-      if (bar) { bar.style.width = (onDone ? 100 : ((i + 1) / stepCount) * 100) + '%'; }
-      if (label) { label.textContent = onDone ? '完了' : (i + 1) + ' / ' + stepCount; }
-      var heading = panels[i].querySelector('h2');
-      if (userMove) {
-        panels[i].scrollIntoView({ block: 'start' });
-        if (heading) {
-          heading.setAttribute('tabindex', '-1');
-          heading.focus({ preventScroll: true });
-        }
-        if (live) {
-          live.textContent = '';
-          window.setTimeout(function () {
-            live.textContent = onDone ? '最後まで終わりました。' : 'ステップ ' + (i + 1) + '、全部で ' + stepCount + ' です。';
-          }, 30);
-        }
-      }
-    }
+    // 画面の下に置く「前へ」「次へ」のバー。どのステップでも押せる位置にある
+    var stepbar = document.createElement('nav');
+    stepbar.className = 'stepbar';
+    stepbar.setAttribute('aria-label', '前のステップと次のステップ');
+    var inner = document.createElement('div');
+    inner.className = 'wrap';
+    var backBtn = document.createElement('button');
+    backBtn.type = 'button';
+    backBtn.className = 'btn btn--ghost btn--back';
+    backBtn.textContent = '前のステップ';
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'btn btn--go';
+    inner.appendChild(backBtn);
+    inner.appendChild(nextBtn);
+    stepbar.appendChild(inner);
+    if (main) { main.insertAdjacentElement('afterend', stepbar); } else { document.body.appendChild(stepbar); }
 
     function indexFromId(id) {
       if (id === 'more') { id = 'done'; }
@@ -187,14 +147,74 @@
       return -1;
     }
 
+    function indexFromHash() {
+      var k = indexFromId(decodeURIComponent(location.hash.replace(/^#/, '')));
+      return k < 0 ? 0 : k;
+    }
+
+    function labelOf(i) {
+      if (panels[i] === doneEl) { return '完了'; }
+      if (i < firstNumbered) { return 'はじめ'; }
+      return (i - firstNumbered + 1) + ' / ' + stepCount;
+    }
+
+    function nextLabelOf(i) {
+      if (i === lastNumbered) { return '完了へ'; }
+      if (i < firstNumbered) { return 'はじめる'; }
+      return '次のステップへ';
+    }
+
+    var current = -1;
+
+    function show(i, userMove) {
+      current = i;
+      panels.forEach(function (p, k) { p.classList.toggle('is-current', k === i); });
+      pills.forEach(function (a) {
+        var k = indexFromId(a.getAttribute('href').slice(1));
+        a.classList.toggle('is-visited', k > -1 && k < i);
+        if (k === i) { a.setAttribute('aria-current', 'step'); } else { a.removeAttribute('aria-current'); }
+        if (k === i && navList) { navList.scrollLeft = a.offsetLeft - navList.clientWidth / 2 + a.clientWidth / 2; }
+      });
+
+      var onDone = (panels[i] === doneEl);
+      var width = 0;
+      if (onDone) { width = 100; } else if (i >= firstNumbered) { width = ((i - firstNumbered + 1) / stepCount) * 100; }
+      bar.style.width = width + '%';
+      if (label) { label.textContent = labelOf(i); }
+
+      backBtn.hidden = (i === 0);
+      nextBtn.hidden = (i >= panels.length - 1);
+      nextBtn.textContent = nextLabelOf(i);
+
+      if (main) { main.scrollTop = 0; }
+
+      var heading = panels[i].querySelector('h1, h2');
+      if (userMove) {
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          heading.focus({ preventScroll: true });
+        }
+        if (live) {
+          live.textContent = '';
+          window.setTimeout(function () {
+            live.textContent = onDone ? '最後まで終わりました。' : (labelOf(i) === 'はじめ' ? 'はじめのページです。' : 'ステップ ' + labelOf(i) + ' です。');
+          }, 30);
+        }
+      }
+    }
+
+    backBtn.addEventListener('click', function () {
+      if (current > 0) { location.hash = panels[current - 1].id; }
+    });
+    nextBtn.addEventListener('click', function () {
+      if (current < panels.length - 1) { location.hash = panels[current + 1].id; }
+    });
+
     window.addEventListener('hashchange', function () {
       var i = indexFromHash();
       if (i !== current) { show(i, true); }
     });
 
     show(indexFromHash(), false);
-    if (location.hash && indexFromHash() > 0) {
-      window.setTimeout(function () { panels[current].scrollIntoView({ block: 'start' }); }, 0);
-    }
   }
 })();
