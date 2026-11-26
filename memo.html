@@ -8,7 +8,7 @@
 <meta name="description" content="事業所の情報をファイルにしてAIに読ませるワークの、ファイルのダウンロードと文章のコピーができます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=18">
-<link rel="stylesheet" href="assets/style.css?v=25">
+<link rel="stylesheet" href="assets/style.css?v=26">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -42,9 +42,8 @@
     <div class="steps">
       <section class="step step--intro" id="start" aria-label="はじめ">
         <div class="step-body">
-          <p class="eyebrow">ワーク2</p>
     <h1>事業所メモ<br>（md ファイル）を使う</h1>
-    <p class="lead">事業所の情報をファイルにして、AIに読ませます。そうすると、毎回、背景をチャットに貼らなくてよくなります。</p>
+    <p class="lead">事業所の情報をファイルにして、AIに読ませます。毎回、背景をチャットに貼らなくてよくなります。</p>
 
     <div class="notice" role="note">
       <strong>入れてよいのは、このページのダミーだけです</strong>
@@ -64,12 +63,12 @@
           <ul class="files">
             <li><div><b>事業所メモ（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo.md" download="事業所メモ.md">ダウンロード</a></li>
           </ul>
-          <p class="look">ダウンロードしたファイルは、パソコンの「ダウンロード」フォルダに入ります。ダミーなので、実在の人や事業所の情報は入っていません。</p>
+          <p class="look">ダウンロードしたファイルは、パソコンの「ダウンロード」フォルダに入ります。</p>
 
           <details class="help">
             <summary>ファイルの中身を見る</summary>
             <div class="body">
-              <p>見出しの前に <code>#</code> が付いた、ふつうの文字のファイルです。5つの項目（事業所の種類、作業や支援の内容、大事にしている言葉づかい、使わない言葉、文の長さの好み）が入っています。</p>
+              <p>5つの項目（事業所の種類、作業や支援の内容、大事にしている言葉づかい、使わない言葉、文の長さの好み）が入っています。</p>
               <figure class="prompt">
                 <figcaption>ファイルの中身<button type="button" class="copy" data-copy="memo-full" aria-label="「ファイルの中身」をコピー">コピー</button></figcaption>
                 <pre class="text" id="memo-full">
@@ -124,7 +123,7 @@
         <div class="step-side"><span class="num" aria-hidden="true">02</span><span class="kind">貼る</span></div>
         <div class="step-body">
           <h2 id="m2-t"><span class="sr">ステップ2　</span>問いは短く書く</h2>
-          <p>ダウンロードしたファイルを、AIのチャットに付けます。そのあと、次の文だけを送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているからです。</p>
+          <p>ダウンロードしたファイルを、AIのチャットに付けてから、次の文を送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているためです。</p>
           <figure class="prompt">
             <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q1" aria-label="「初めての人にも分かる手順を、3つで書…」をコピー">コピー</button></figcaption>
             <p class="text" id="q1">初めての人にも分かる手順を、3つで書いてください。</p>
@@ -149,7 +148,7 @@
         <div class="step-side"><span class="num" aria-hidden="true">03</span><span class="kind">足す</span></div>
         <div class="step-body">
           <h2 id="m3-t"><span class="sr">ステップ3　</span>足りない点は md に足す</h2>
-          <p>出てきた文を見て、直したいところを探します。たとえば、長いことや、言葉づかいがファイルと違うことです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
+          <p>出てきた文のうち、直したいところを探します。たとえば、長すぎる文や、ファイルと違う言葉づかいです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
           <p>次の1行を足したファイルを用意しています。先ほどのファイルの代わりに、これを付けます。</p>
           <ul class="files">
             <li><div><b>1行を足した事業所メモ（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_20字.md">ダウンロード</a></li>
@@ -158,7 +157,7 @@
             <figcaption>ファイルに足した1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
             <p class="text" id="add1">- 1文は20字まで</p>
           </figure>
-          <p class="look">同じ問いで、文が短くなったかを見ます。直すのは1回です。「短くして」とプロンプトに足さず、ファイルに足します。</p>
+          <p class="look">同じ問いで、文が短くなったかを見ます。</p>
         </div>
       </section>
 
@@ -167,7 +166,6 @@
     <div id="done" class="done-panel">
     <div class="finish">
       <h2>ワーク2はここまでです</h2>
-      <p>背景をファイルにしておくと、問いが短くなり、直す場所もファイルの1か所に決まります。</p>
       <p>次のチャットでも同じ背景を使いたいときは、同じファイルをもう一度付けます。</p>
       <p>会場のパソコンは練習用の共有です。ワークが終わったら、今日のチャットを消してください。</p>
     </div>
@@ -199,8 +197,6 @@
 
 <footer class="foot">
   <div class="wrap">
-    <p class="foot-info">2026年11月27日 福祉事業所のAI導入と活用セミナー AIレクチャーワーク用ページ</p>
-    <p class="foot-info">このページの文章とファイルは、研修用のダミーです。</p>
     <p class="copyright">© LITALICO 2026</p>
   </div>
 </footer>

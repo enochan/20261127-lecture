@@ -16,10 +16,6 @@
   --radius: 10px;
   --font: "Noto Sans JP Variable", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic", "Meiryo", system-ui, sans-serif;
   --mono: "SFMono-Regular", Consolas, "Courier New", monospace;
-  --icon-copy: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='9' y='9' width='11' height='11' rx='2'/%3E%3Cpath d='M5 15V6a2 2 0 0 1 2-2h9'/%3E%3C/svg%3E");
-  --icon-check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7'/%3E%3C/svg%3E");
-  --icon-down: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 4v11'/%3E%3Cpath d='M7 11l5 5 5-5'/%3E%3Cpath d='M5 20h14'/%3E%3C/svg%3E");
-  --icon-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12h14'/%3E%3Cpath d='M13 6l6 6-6 6'/%3E%3C/svg%3E");
 }
 
 * { box-sizing: border-box; }
@@ -48,7 +44,6 @@ a:hover { color: var(--accent); }
 .top { background: var(--bg); border-bottom: 1px solid var(--line); }
 .top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 4px 24px; flex-wrap: wrap; min-height: 44px; padding-top: 4px; padding-bottom: 4px; }
 .logo { font-weight: 700; font-size: 15px; text-decoration: none; letter-spacing: 0.01em; display: inline-flex; align-items: center; gap: 10px; }
-.logo::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: var(--accent); }
 .top nav { display: flex; gap: 2px; flex-wrap: wrap; }
 .top nav a { text-decoration: none; padding: 6px 10px; font-size: 15px; border-radius: 8px; color: var(--muted); line-height: 1.3; }
 .top nav a:hover { background: #efefe8; color: var(--ink); }
@@ -56,7 +51,6 @@ a:hover { color: var(--accent); }
 
 main { padding: 44px 0 72px; }
 
-.eyebrow { margin: 0 0 14px; font-size: 15px; color: var(--muted); letter-spacing: 0.04em; line-height: 1.5; }
 h1 { font-size: 40px; line-height: 1.3; letter-spacing: -0.01em; margin: 0 0 18px; font-weight: 700; }
 h2 { font-size: 26px; line-height: 1.4; letter-spacing: -0.005em; margin: 0 0 12px; font-weight: 700; }
 h3 { font-size: 19px; line-height: 1.5; margin: 0 0 4px; font-weight: 700; }
@@ -73,23 +67,19 @@ p { margin: 0 0 14px; }
 /* トップの入口 */
 .entry-list { list-style: none; margin: 0 0 56px; padding: 0; border-top: 1px solid var(--ink); }
 .entry-list a {
-  display: grid; grid-template-columns: 56px 1fr 28px; gap: 8px 16px; align-items: center;
+  display: block;
   padding: 24px 6px; border-bottom: 1px solid var(--line-strong); text-decoration: none; color: var(--ink);
   transition: background 0.15s;
 }
 .entry-list a:hover { background: #f1f1ea; color: var(--ink); }
-.entry-list .idx { font-size: 36px; font-weight: 300; color: var(--accent); line-height: 1; letter-spacing: -0.02em; }
 .entry-list h2 { margin: 0 0 4px; font-size: 22px; }
 .entry-list p { margin: 0; font-size: 16px; line-height: 1.7; color: var(--muted); }
-.entry-list .arrow { width: 24px; height: 24px; background: var(--ink); mask: var(--icon-arrow) center / contain no-repeat; -webkit-mask: var(--icon-arrow) center / contain no-repeat; transition: transform 0.15s; }
-.entry-list a:hover .arrow { transform: translateX(4px); }
 
 .section-title { font-size: 15px; font-weight: 700; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 14px; }
 
 /* 使い方 */
 .howto { list-style: none; counter-reset: h; margin: 0 0 56px; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
 .howto li { counter-increment: h; border-top: 2px solid var(--ink); padding-top: 12px; }
-.howto li::before { content: counter(h, decimal-leading-zero); display: block; font-size: 14px; color: var(--accent); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 4px; }
 .howto b { display: block; font-size: 18px; line-height: 1.55; margin-bottom: 4px; }
 .howto span { display: block; font-size: 15px; line-height: 1.7; color: var(--muted); }
 
@@ -136,11 +126,7 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 }
 .copy:hover, .btn:hover { background: var(--accent-hover); border-color: var(--accent-hover); color: #fff; }
 .copy:active, .btn:active { transform: translateY(1px); }
-.copy::before, .btn--dl::before, .btn--go::after { content: ""; width: 20px; height: 20px; flex: none; background: currentColor; mask: var(--icon-copy) center / contain no-repeat; -webkit-mask: var(--icon-copy) center / contain no-repeat; }
-.btn--dl::before { mask-image: var(--icon-down); -webkit-mask-image: var(--icon-down); }
-.btn--go::after { mask-image: var(--icon-arrow); -webkit-mask-image: var(--icon-arrow); }
 .copy.is-copied { background: var(--ink); border-color: var(--ink); }
-.copy.is-copied::before { mask-image: var(--icon-check); -webkit-mask-image: var(--icon-check); }
 .copy.is-failed { background: var(--danger); border-color: var(--danger); }
 .btn--ghost { background: transparent; color: var(--ink); border-color: var(--ink); }
 .btn--ghost:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
@@ -148,9 +134,7 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 .copy.wide { margin: 8px 0 0; }
 
 /* 確かめる一文 */
-.look { display: grid; grid-template-columns: 24px 1fr; gap: 10px; align-items: start; margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); font-weight: 700; line-height: 1.7; }
-.look::before { content: ""; width: 22px; height: 22px; margin-top: 4px; background: var(--accent); mask: var(--icon-check) center / contain no-repeat; -webkit-mask: var(--icon-check) center / contain no-repeat; }
-.step--check .look::before { background: var(--muted); }
+.look { display: block; margin: 18px 0 0; padding: 14px 0 0; border-top: 1px solid var(--line); font-weight: 700; line-height: 1.7; }
 
 .next { margin: 18px 0 0; font-size: 15px; }
 .next a { color: var(--muted); }
@@ -205,7 +189,6 @@ code { font-family: var(--mono); font-size: 0.92em; background: #efefe8; border:
 
 /* トップ：最初の画面に、入口と注意と使い方が収まるように詰める */
 main.home { padding: 14px 0 40px; }
-.home .eyebrow { margin-bottom: 2px; line-height: 1.4; }
 .home h1 { font-size: 30px; margin-bottom: 10px; }
 .home .lead { font-size: 17px; line-height: 1.6; margin-bottom: 12px; }
 .home .notice { margin-bottom: 18px; padding: 10px 16px; }
@@ -216,7 +199,6 @@ main.home { padding: 14px 0 40px; }
 .home .entry-list a { padding: 12px 6px; }
 .home .entry-list h2 { font-size: 20px; }
 .home .entry-list p { font-size: 15px; }
-.home .entry-list .idx { font-size: 30px; }
 .home .howto { margin-bottom: 28px; gap: 16px; }
 .home .howto b { font-size: 16px; }
 .home .howto span { font-size: 14px; }
@@ -231,7 +213,6 @@ main.home { padding: 14px 0 40px; }
 .progress { height: 3px; background: var(--line); }
 .progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease-out; }
 
-.btn--back::before { content: ""; width: 20px; height: 20px; flex: none; background: currentColor; mask: var(--icon-arrow) center / contain no-repeat; -webkit-mask: var(--icon-arrow) center / contain no-repeat; transform: scaleX(-1); }
 
 .stepbar { display: none; }
 .js-steps .stepbar { display: block; flex: none; background: var(--bg); border-top: 1px solid var(--line-strong); }
@@ -240,12 +221,11 @@ main.home { padding: 14px 0 40px; }
 .stepbar .btn--go { margin-left: auto; }
 
 .js-steps .step { display: none; border-top: 1px solid var(--ink); }
-.js-steps .step.is-current { display: grid; animation: step-in 0.22s ease-out; }
+.js-steps .step.is-current { display: grid; }
 .js-steps .step--intro.is-current { display: block; }
 .js-steps #done { display: none; border-top: 1px solid var(--ink); }
-.js-steps #done.is-current { display: block; animation: step-in 0.22s ease-out; }
+.js-steps #done.is-current { display: block; }
 .done-panel .finish { border-top: 0; padding-top: 0; margin-top: 0; }
-@keyframes step-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
 html.js-steps, html.js-steps body { height: 100%; }
 html.js-steps body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; overflow: hidden; }
@@ -260,7 +240,6 @@ html.js-steps .foot .wrap { padding-top: 0; padding-bottom: 0; }
 html.js-steps .foot-info { display: none; }
 html.js-steps .toast { bottom: 84px; }
 
-html.js-steps .eyebrow { margin-bottom: 2px; font-size: 14px; line-height: 1.4; }
 html.js-steps h1 { font-size: 28px; margin-bottom: 8px; }
 html.js-steps .lead { font-size: 17px; line-height: 1.7; margin-bottom: 10px; }
 html.js-steps .notice { margin-bottom: 10px; padding: 10px 16px; }
@@ -306,8 +285,7 @@ html.js-steps .finish h2 { font-size: 22px; }
   h2 { font-size: 23px; }
   .lead { font-size: 18px; }
   .howto { grid-template-columns: 1fr; gap: 18px; }
-  .entry-list a { grid-template-columns: 40px 1fr 24px; padding: 20px 2px; }
-  .entry-list .idx { font-size: 30px; }
+  .entry-list a { padding: 20px 2px; }
   .step { grid-template-columns: 1fr; padding: 32px 0; }
   .step-side { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
   .step .num { font-size: 34px; }
@@ -337,8 +315,7 @@ html.js-steps .finish h2 { font-size: 22px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .toast, .entry-list a, .entry-list .arrow, .copy, .btn, .progress span { transition: none; }
-  .js-steps .step.is-current, .js-steps #done.is-current { animation: none; }
+  .toast, .entry-list a, .copy, .btn, .progress span { transition: none; }
 }
 
 @media print {
