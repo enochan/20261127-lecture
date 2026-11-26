@@ -186,17 +186,20 @@
         <div class="step-body">
           <h2 id="m3-t"><span class="sr">ステップ3　</span>足りない点は md に足す</h2>
           <p>出てきた文のうち、直したいところを探します。たとえば、長すぎる文や、ファイルと違う言葉づかいです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
-          <p>ステップ1でダウンロードしたファイルに、次の1行を足します。</p>
-          <ol class="plain">
-            <li>ファイルを右クリックして、「プログラムから開く」の「メモ帳」で開きます。</li>
-            <li>いちばん下に、次の1行を貼り付けます。足す行は、行の頭に <code>-</code> と半角の空白を付けて書きます。箇条書きの記号です。
-              <figure class="prompt">
-                <figcaption>ファイルに足す1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
-                <p class="text" id="add1">- 1文は20字まで</p>
-              </figure>
-            </li>
-            <li>上書き保存して、AIのチャットにファイルを付け直し、ステップ2と同じ問いを送ります。</li>
-          </ol>
+
+          <h3 style="margin-top:16px;">手順1：1行足す</h3>
+          <p>ステップ1でダウンロードしたファイルを右クリックして、「プログラムから開く」の「メモ帳」で開きます。いちばん下に、次の1行を貼り付けます。行の頭に <code>-</code> と半角の空白を付けるのが、箇条書きの記号です。</p>
+          <figure class="prompt">
+            <figcaption>ファイルに足す1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
+            <p class="text" id="add1">- 1文は20字まで</p>
+          </figure>
+
+          <h3 style="margin-top:16px;">手順2：プロンプトする</h3>
+          <p>上書き保存して、AIのチャットにファイルを付け直してから、ステップ2と同じ問いを送ります。</p>
+          <figure class="prompt">
+            <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q3" aria-label="「初めての人にも分かる手順を、3つで書…」をコピー">コピー</button></figcaption>
+            <p class="text" id="q3">初めての人にも分かる手順を、3つで書いてください。</p>
+          </figure>
           <p class="look">同じ問いで、文が短くなったかを見ます。</p>
           <p class="next"><a href="#m4">つぎのステップへ</a></p>
         </div>
