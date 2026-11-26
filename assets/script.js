@@ -94,27 +94,107 @@
     });
   });
 
-  // ステップのナビ：いま見ているステップを強調する
-  var nav = document.querySelector('.stepnav ol');
-  var pills = document.querySelectorAll('.stepnav a');
-  if (nav && pills.length && 'IntersectionObserver' in window) {
-    var map = {};
-    Array.prototype.forEach.call(pills, function (a) {
-      map[a.getAttribute('href').slice(1)] = a;
-    });
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) { return; }
-        var a = map[entry.target.id];
-        if (!a) { return; }
-        Array.prototype.forEach.call(pills, function (p) { p.removeAttribute('aria-current'); });
-        a.setAttribute('aria-current', 'step');
-        nav.scrollLeft = a.offsetLeft - nav.clientWidth / 2 + a.clientWidth / 2;
+  // ステップを1つずつ表示する（JavaScript が使えないときは、全部を縦に並べたままにする）
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.steps > .step'));
+  var doneEl = document.getElementById('done');
+  var stepCount = panels.length;
+  if (doneEl) { panels.push(doneEl); }
+
+  if (stepCount > 1) {
+    document.documentElement.classList.add('js-steps');
+
+    var stepnav = document.querySelector('.stepnav');
+    var navList = document.querySelector('.stepnav ol');
+    var pills = Array.prototype.slice.call(document.querySelectorAll('.stepnav ol a'));
+    var label = document.querySelector('.stepnav .label');
+    var bar = null;
+    if (stepnav) {
+      var track = document.createElement('div');
+      track.className = 'progress';
+      track.setAttribute('aria-hidden', 'true');
+      bar = document.createElement('span');
+      track.appendChild(bar);
+      stepnav.appendChild(track);
+    }
+
+    function indexFromHash() {
+      var h = decodeURIComponent(location.hash.replace(/^#/, ''));
+      if (h === 'more') { h = 'done'; }
+      for (var i = 0; i < panels.length; i++) {
+        if (panels[i].id === h) { return i; }
+      }
+      return 0;
+    }
+
+    function addButtons(panel, i) {
+      var holder = panel.querySelector('.step-body') || panel;
+      var row = document.createElement('div');
+      row.className = 'step-nav';
+      if (i > 0) {
+        var back = document.createElement('button');
+        back.type = 'button';
+        back.className = 'btn btn--ghost btn--back';
+        back.textContent = '前のステップ';
+        back.addEventListener('click', function () { location.hash = panels[i - 1].id; });
+        row.appendChild(back);
+      }
+      if (i < panels.length - 1) {
+        var next = document.createElement('button');
+        next.type = 'button';
+        next.className = 'btn btn--go';
+        next.textContent = (i === stepCount - 1) ? '完了へ' : '次のステップへ';
+        next.addEventListener('click', function () { location.hash = panels[i + 1].id; });
+        row.appendChild(next);
+      }
+      holder.appendChild(row);
+    }
+    panels.forEach(addButtons);
+
+    var current = -1;
+    function show(i, userMove) {
+      current = i;
+      panels.forEach(function (p, k) { p.classList.toggle('is-current', k === i); });
+      pills.forEach(function (a) {
+        var k = indexFromId(a.getAttribute('href').slice(1));
+        a.classList.toggle('is-visited', k > -1 && k < i);
+        if (k === i) { a.setAttribute('aria-current', 'step'); } else { a.removeAttribute('aria-current'); }
+        if (k === i && navList) { navList.scrollLeft = a.offsetLeft - navList.clientWidth / 2 + a.clientWidth / 2; }
       });
-    }, { rootMargin: '-25% 0px -65% 0px' });
-    Object.keys(map).forEach(function (id) {
-      var target = document.getElementById(id);
-      if (target) { observer.observe(target); }
+      var onDone = (i >= stepCount);
+      if (bar) { bar.style.width = (onDone ? 100 : ((i + 1) / stepCount) * 100) + '%'; }
+      if (label) { label.textContent = onDone ? '完了' : (i + 1) + ' / ' + stepCount; }
+      var heading = panels[i].querySelector('h2');
+      if (userMove) {
+        panels[i].scrollIntoView({ block: 'start' });
+        if (heading) {
+          heading.setAttribute('tabindex', '-1');
+          heading.focus({ preventScroll: true });
+        }
+        if (live) {
+          live.textContent = '';
+          window.setTimeout(function () {
+            live.textContent = onDone ? '最後まで終わりました。' : 'ステップ ' + (i + 1) + '、全部で ' + stepCount + ' です。';
+          }, 30);
+        }
+      }
+    }
+
+    function indexFromId(id) {
+      if (id === 'more') { id = 'done'; }
+      for (var i = 0; i < panels.length; i++) {
+        if (panels[i].id === id) { return i; }
+      }
+      return -1;
+    }
+
+    window.addEventListener('hashchange', function () {
+      var i = indexFromHash();
+      if (i !== current) { show(i, true); }
     });
+
+    show(indexFromHash(), false);
+    if (location.hash && indexFromHash() > 0) {
+      window.setTimeout(function () { panels[current].scrollIntoView({ block: 'start' }); }, 0);
+    }
   }
 })();

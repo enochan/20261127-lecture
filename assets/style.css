@@ -99,7 +99,7 @@ p { margin: 0 0 14px; }
 .stepnav .label { font-size: 13px; color: var(--muted); white-space: nowrap; letter-spacing: 0.06em; }
 .stepnav ol { list-style: none; margin: 0; padding: 0; display: flex; gap: 2px; overflow-x: auto; flex: 1; scrollbar-width: none; position: relative; }
 .stepnav ol::-webkit-scrollbar { display: none; }
-.stepnav a { display: grid; place-items: center; min-width: 40px; height: 40px; padding: 0 6px; border-radius: 8px; color: var(--muted); font-weight: 600; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; }
+.stepnav a { display: grid; place-items: center; white-space: nowrap; flex: none; min-width: 40px; height: 40px; padding: 0 6px; border-radius: 8px; color: var(--muted); font-weight: 600; font-size: 16px; text-decoration: none; font-variant-numeric: tabular-nums; }
 .stepnav a:hover { background: #efefe8; color: var(--ink); }
 .stepnav a[aria-current="step"] { background: var(--ink); color: #fff; }
 
@@ -197,6 +197,26 @@ code { font-family: var(--mono); font-size: 0.92em; background: #efefe8; border:
 .foot { border-top: 1px solid var(--line); padding: 20px 0 48px; color: var(--muted); font-size: 14px; line-height: 1.7; }
 .foot p { margin: 0 0 4px; }
 
+
+/* ステップを1つずつ表示する（JavaScript が動くときだけ） */
+.js-steps .step { display: none; border-top: 1px solid var(--ink); }
+.js-steps .step.is-current { display: grid; animation: step-in 0.22s ease-out; }
+.js-steps #done { display: none; scroll-margin-top: 56px; border-top: 1px solid var(--ink); padding-top: 32px; margin-top: 8px; }
+.js-steps #done.is-current { display: block; animation: step-in 0.22s ease-out; }
+.js-steps #done.finish { padding-top: 32px; }
+.js-steps .next { display: none; }
+.done-panel .finish { border-top: 0; padding-top: 0; margin-top: 0; }
+@keyframes step-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+.step-nav { display: flex; gap: 12px; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--line); }
+.step-nav .btn--go { margin-left: auto; min-height: 56px; padding: 10px 28px; font-size: 18px; }
+.btn--back::before { content: ""; width: 20px; height: 20px; flex: none; background: currentColor; mask: var(--icon-arrow) center / contain no-repeat; -webkit-mask: var(--icon-arrow) center / contain no-repeat; transform: scaleX(-1); }
+
+.stepnav .label { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--ink); min-width: 4.2em; }
+.stepnav a.is-visited { color: var(--accent); }
+.stepnav a.is-visited[aria-current="step"] { color: #fff; }
+.progress { height: 3px; background: var(--line); }
+.progress span { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.25s ease-out; }
 @media (max-width: 680px) {
   body { font-size: 17px; }
   main { padding: 32px 0 56px; }
@@ -218,13 +238,16 @@ code { font-family: var(--mono); font-size: 0.92em; background: #efefe8; border:
   .btn, .copy.wide { width: 100%; }
   .files li { grid-template-columns: 1fr; }
   .files .btn { width: 100%; }
-  .stepnav .label { display: none; }
+  .stepnav .label { font-size: 13px; min-width: 3.6em; }
+  .step-nav { flex-direction: column-reverse; align-items: stretch; }
+  .step-nav .btn--go { margin-left: 0; }
   .top nav a { padding: 10px 10px; font-size: 15px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .toast, .entry-list a, .entry-list .arrow, .copy, .btn { transition: none; }
+  .toast, .entry-list a, .entry-list .arrow, .copy, .btn, .progress span { transition: none; }
+  .js-steps .step.is-current, .js-steps #done.is-current { animation: none; }
 }
 
 @media print {

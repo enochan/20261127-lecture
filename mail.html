@@ -7,8 +7,8 @@
 <title>ワーク1 取引先へのお願いメール｜福祉事業所のAI導入と活用セミナー</title>
 <meta name="description" content="同じチャットで、取引先へのお願いメールを少しずつ育てるワークの文章をコピーできます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=5">
-<link rel="stylesheet" href="assets/style.css?v=5">
+<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=7">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -39,6 +39,7 @@
       <li><a href="#s9" aria-label="ステップ9">9</a></li>
       <li><a href="#s10" aria-label="ステップ10">10</a></li>
       <li><a href="#s11" aria-label="ステップ11">11</a></li>
+      <li><a href="#done" aria-label="ワーク1の終わり">完了</a></li>
     </ol>
   </div>
 </nav>
@@ -58,7 +59,7 @@
       <a class="btn btn--ghost btn--go" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini を開く（新しいタブ）</a>
     </div>
     <p class="note">ふだん使っている ChatGPT や Claude でも、同じようにできます。</p>
-    <p class="note">ステップは、上から順に進めます。「貼る」はコピーしてAIに送るもの、「確かめる」は見て自分で考えるものです。</p>
+    <p class="note">ステップは1つずつ表示されます。終わったら、下の「次のステップへ」を押します。「貼る」はコピーしてAIに送るもの、「確かめる」は見て自分で考えるものです。</p>
 
     <div class="steps">
 
@@ -226,7 +227,7 @@
 
     </div>
 
-    <div class="finish">
+    <div class="finish" id="done">
       <h2>ワーク1はここまでです</h2>
       <p>最初は作業だけを頼み、足りないものを1つずつ足すと、返ってくる文が変わっていきました。</p>
       <p>会場のパソコンは練習用の共有です。ワークが終わったら、今日のチャットを消してください。</p>
@@ -244,6 +245,6 @@
 
 <div id="live" class="sr" aria-live="polite" role="status"></div>
 <div id="toast" class="toast" aria-hidden="true"></div>
-<script src="assets/script.js?v=5"></script>
+<script src="assets/script.js?v=7"></script>
 </body>
 </html>
