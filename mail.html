@@ -8,7 +8,7 @@
 <meta name="description" content="同じチャットで、取引先へのお願いメールを少しずつ育てるワークの文章をコピーできます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=18">
-<link rel="stylesheet" href="assets/style.css?v=34">
+<link rel="stylesheet" href="assets/style.css?v=36">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -101,12 +101,12 @@
         <div class="step-body">
           <h2 id="s3-t"><span class="sr">ステップ3　</span>依頼メールに必要な背景</h2>
           <p>依頼のメールを書くときに、必要な背景は4つあります。</p>
-          <div class="grid4">
-            <div><h3>相手</h3><p>宛先と、相手との関係</p></div>
-            <div><h3>依頼内容</h3><p>協力してほしいこと</p></div>
-            <div><h3>条件</h3><p>新しい納品日、数量、回答先</p></div>
-            <div><h3>背景</h3><p>依頼の経緯や、伝えておく事情</p></div>
-          </div>
+          <ul class="plain">
+            <li><strong>相手</strong>：宛先と、相手との関係</li>
+            <li><strong>依頼内容</strong>：協力してほしいこと</li>
+            <li><strong>条件</strong>：新しい納品日、数量、回答先</li>
+            <li><strong>背景</strong>：依頼の経緯や、伝えておく事情</li>
+          </ul>
           <p class="look">ステップ2で言葉にした足りない情報は、この4つのどれに入りますか。</p>
           <p class="next"><a href="#s4">つぎのステップへ</a></p>
         </div>
@@ -116,10 +116,17 @@
         <div class="step-side"><span class="num" aria-hidden="true">04</span><span class="kind">貼る</span></div>
         <div class="step-body">
           <h2 id="s4-t"><span class="sr">ステップ4　</span>② 背景を足す</h2>
-          <p>ステップ3の4つを、1つの文にしました。<strong>同じチャットに</strong>貼ります。</p>
+          <p>ステップ3の4つを、見出しをつけて並べました。<strong>同じチャットに</strong>貼ります。</p>
           <figure class="prompt">
             <figcaption>AIに送る文<button type="button" class="copy" data-copy="p4" aria-label="「次の背景を踏まえて、メールを書き直し…」をコピー">コピー</button></figcaption>
-            <p class="text" id="p4">次の背景を踏まえて、メールを書き直してください。当事業所は就労継続支援B型です。送り先は、5年以上お取引のある［取引先名］様の担当者です。お願いは、袋詰め作業（作業A）の納品日を1週間後ろにずらすことです。先月、作業メンバーの欠席が続き、納品が遅れそうです。冒頭でお詫びし、今後の取引を大切にした丁寧な文面にしてください。新しい納品日は［日付］、回答は［連絡先］へお願いします。</p>
+            <pre class="text" id="p4">次の背景を踏まえて、メールを書き直してください。
+
+【相手】5年以上お取引のある［取引先名］様の担当者
+【依頼内容】袋詰め作業（作業A）の納品日を、1週間後ろにずらしてほしい
+【条件】新しい納品日は［日付］、回答は［連絡先］へ
+【背景】当事業所は就労継続支援B型。先月、作業メンバーの欠席が続き、納品が遅れそう
+
+冒頭でお詫びし、今後の取引を大切にした丁寧な文面にしてください。</pre>
           </figure>
           <p class="note">［取引先名］［日付］［連絡先］は、そのまま送って大丈夫です。実在の会社名や連絡先は入れません。</p>
           <p class="look">①のメールと比べて、どこが変わったかを見ます。</p>
@@ -131,12 +138,23 @@
         <div class="step-side"><span class="num" aria-hidden="true">05</span><span class="kind">確かめる</span></div>
         <div class="step-body">
           <h2 id="s5-t"><span class="sr">ステップ5　</span>渡した背景は、どこに入ったか</h2>
-          <p>渡した背景が、メールのどこに出てきたかを探します。</p>
-          <ul class="rows">
-            <li><span class="k">欠席が続いた</span><span class="v">冒頭のお詫び</span></li>
-            <li><span class="k">5年以上の取引</span><span class="v">丁寧な文体、今後につながる締め</span></li>
-            <li><span class="k">納品日の変更</span><span class="v">依頼の目的を、はっきり書く</span></li>
-            <li><span class="k">日付と連絡先</span><span class="v">期限と回答先</span></li>
+          <p>ステップ4で送った文の全文です。渡した背景が、返ってきたメールのどこに出てきたかを探します。</p>
+          <figure class="prompt">
+            <figcaption>ステップ4で送った文</figcaption>
+            <pre class="text" id="p4-view">次の背景を踏まえて、メールを書き直してください。
+
+【相手】5年以上お取引のある［取引先名］様の担当者
+【依頼内容】袋詰め作業（作業A）の納品日を、1週間後ろにずらしてほしい
+【条件】新しい納品日は［日付］、回答は［連絡先］へ
+【背景】当事業所は就労継続支援B型。先月、作業メンバーの欠席が続き、納品が遅れそう
+
+冒頭でお詫びし、今後の取引を大切にした丁寧な文面にしてください。</pre>
+          </figure>
+          <ul class="plain">
+            <li><strong>【相手】</strong>：5年以上の取引が、丁寧な文体や、今後につながる締めの一文に出ているか</li>
+            <li><strong>【依頼内容】</strong>：納品日を1週間ずらしてほしい、という目的がはっきり書かれているか</li>
+            <li><strong>【条件】</strong>：新しい納品日と、回答先が入っているか</li>
+            <li><strong>【背景】</strong>：欠席が続いたことが、冒頭のお詫びの理由として書かれているか</li>
           </ul>
           <p class="look">4つの背景が、それぞれメールの中に入っているかを見ます。入っていないものがあれば、メールの中を探します。</p>
           <p class="next"><a href="#s6">つぎのステップへ</a></p>

@@ -108,7 +108,8 @@ p { margin: 0 0 14px; }
 .prompt { margin: 18px 0 16px; background: var(--paper); border: 1px solid var(--line-strong); border-radius: var(--radius); }
 .prompt figcaption { border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 8px 8px 18px; background: #f4f4ee; border-bottom: 1px solid var(--line); font-size: 14px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
 .prompt .text { margin: 0; padding: 18px 20px; font-size: 19px; line-height: 1.85; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
-pre.text { white-space: pre-wrap; font-family: var(--font); user-select: text; -webkit-user-select: text; max-height: 380px; overflow: auto; }
+pre.text { white-space: pre-wrap; font-family: var(--font); user-select: text; -webkit-user-select: text; }
+#memo-full { max-height: 380px; overflow: auto; }
 .prompt.compact { margin: 10px 0; display: grid; grid-template-columns: 1fr auto; align-items: center; }
 .prompt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 14px; }
 .prompt-grid .prompt.compact { margin: 6px 0; }
@@ -152,11 +153,6 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 .rows li { display: grid; grid-template-columns: minmax(120px, 190px) 1fr; gap: 4px 20px; padding: 12px 2px; border-bottom: 1px solid var(--line); }
 .rows .k { font-weight: 700; }
 .rows .v { color: var(--ink); }
-
-.grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 16px 0 0; background: var(--line-strong); border: 1px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; }
-.grid4 > div { background: var(--paper); padding: 14px 18px; }
-.grid4 h3 { margin: 0 0 2px; }
-.grid4 p { margin: 0; font-size: 16px; line-height: 1.7; color: var(--muted); }
 
 /* ヘルプ（開閉） */
 .help { border-top: 1px solid var(--line-strong); }
@@ -269,10 +265,6 @@ html.js-steps .look { margin-top: 8px; padding-top: 8px; font-size: 16px; line-h
 html.js-steps .next { display: none; }
 html.js-steps .rows { margin-top: 8px; }
 html.js-steps .rows li { padding: 6px 2px; font-size: 16px; line-height: 1.6; }
-html.js-steps .grid4 { margin-top: 8px; }
-html.js-steps .grid4 > div { padding: 8px 12px; }
-html.js-steps .grid4 h3 { font-size: 16px; }
-html.js-steps .grid4 p { font-size: 15px; line-height: 1.5; }
 html.js-steps .help summary { min-height: 40px; padding: 8px 4px; font-size: 16px; }
 html.js-steps .help .body { padding-bottom: 10px; font-size: 15px; }
 html.js-steps .step .help { margin-top: 8px; }
@@ -295,7 +287,6 @@ html.js-steps .finish h2 { font-size: 22px; }
   .step-side { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
   .step .num { font-size: 34px; }
   .step .kind { margin-top: 0; }
-  .grid4 { grid-template-columns: 1fr; }
   .rows li { grid-template-columns: 1fr; }
   .prompt .text { padding: 14px 16px; font-size: 18px; }
   .prompt.compact { grid-template-columns: 1fr; }
