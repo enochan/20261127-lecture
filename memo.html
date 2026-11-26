@@ -8,7 +8,7 @@
 <meta name="description" content="事業所の情報をファイルにしてAIに読ませるワークの、ファイルのダウンロードと文章のコピーができます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=18">
-<link rel="stylesheet" href="assets/style.css?v=36">
+<link rel="stylesheet" href="assets/style.css?v=37">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -52,6 +52,35 @@
     </div>
 
     <p>md（エムディー）ファイルは、見出しの前に <code>#</code> を付けて書いた、ふつうの文字のファイルです。</p>
+    <p>記号の意味は、次の3つです。左が書いたとおりの文字、右が表示されたときの見え方です。AIは、この記号から、どこが見出しで、どこが箇条書きかを読み取れます。</p>
+
+    <div class="md-demo">
+      <div class="md-item">
+        <p class="md-name">見出し：<code>#</code> <code>##</code> <code>###</code></p>
+        <div class="md-pair">
+          <div class="md-box md-box--src"><span class="md-cap">書いたとおり</span><pre class="md-src"># 大きな見出し
+## 中くらいの見出し
+### 小さな見出し</pre></div>
+          <div class="md-box"><span class="md-cap">表示されると</span><div class="md-out"><div class="md-h1">大きな見出し</div><div class="md-h2">中くらいの見出し</div><div class="md-h3">小さな見出し</div></div></div>
+        </div>
+      </div>
+      <div class="md-item">
+        <p class="md-name">強調：<code>**</code> ではさむ</p>
+        <div class="md-pair">
+          <div class="md-box md-box--src"><span class="md-cap">書いたとおり</span><pre class="md-src">この言葉は**使いません**。</pre></div>
+          <div class="md-box"><span class="md-cap">表示されると</span><div class="md-out">この言葉は<strong>使いません</strong>。</div></div>
+        </div>
+      </div>
+      <div class="md-item">
+        <p class="md-name">箇条書き：行の頭に <code>-</code></p>
+        <div class="md-pair">
+          <div class="md-box md-box--src"><span class="md-cap">書いたとおり</span><pre class="md-src">- 作業の内容
+- 大事にしている言葉づかい
+- 使わない言葉</pre></div>
+          <div class="md-box"><span class="md-cap">表示されると</span><div class="md-out"><ul class="md-ul"><li>作業の内容</li><li>大事にしている言葉づかい</li><li>使わない言葉</li></ul></div></div>
+        </div>
+      </div>
+    </div>
         </div>
       </section>
 

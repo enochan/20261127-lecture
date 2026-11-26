@@ -154,6 +154,20 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 .rows .k { font-weight: 700; }
 .rows .v { color: var(--ink); }
 
+/* md の記号と、表示されたときの見え方（左右の対比） */
+.md-demo { margin: 16px 0 0; display: grid; gap: 14px; }
+.md-name { margin: 0 0 6px; font-weight: 700; }
+.md-pair { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--paper); }
+.md-box { position: relative; min-width: 0; padding: 30px 16px 14px; }
+.md-box--src { background: #f4f4ee; border-right: 1px solid var(--line-strong); border-radius: calc(var(--radius) - 1px) 0 0 calc(var(--radius) - 1px); }
+.md-cap { position: absolute; top: 8px; left: 16px; font-size: 13px; font-weight: 700; letter-spacing: 0.05em; color: var(--muted); }
+.md-src { margin: 0; font-family: ui-monospace, "Cascadia Mono", Consolas, "Noto Sans JP", monospace; font-size: 16px; line-height: 1.8; white-space: pre-wrap; overflow-wrap: anywhere; }
+.md-out { font-size: 17px; line-height: 1.8; }
+.md-h1 { font-size: 24px; font-weight: 700; line-height: 1.5; }
+.md-h2 { font-size: 20px; font-weight: 700; line-height: 1.6; }
+.md-h3 { font-size: 17px; font-weight: 700; line-height: 1.7; }
+.md-ul { margin: 0; padding-left: 1.4em; }
+
 /* ヘルプ（開閉） */
 .help { border-top: 1px solid var(--line-strong); }
 .help:last-of-type { border-bottom: 1px solid var(--line-strong); }
@@ -288,6 +302,8 @@ html.js-steps .finish h2 { font-size: 22px; }
   .step .num { font-size: 34px; }
   .step .kind { margin-top: 0; }
   .rows li { grid-template-columns: 1fr; }
+  .md-pair { grid-template-columns: 1fr; }
+  .md-box--src { border-right: 0; border-bottom: 1px solid var(--line-strong); border-radius: calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0; }
   .prompt .text { padding: 14px 16px; font-size: 18px; }
   .prompt.compact { grid-template-columns: 1fr; }
   .prompt-grid { grid-template-columns: 1fr; }
