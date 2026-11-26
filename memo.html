@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>ワーク2 事業所メモ（md ファイル）｜福祉事業所のAI導入と活用セミナー</title>
+<meta name="description" content="事業所の情報をファイルにしてAIに読ませるワークの、ファイルのダウンロードと文章のコピーができます。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=5">
+<link rel="stylesheet" href="assets/style.css?v=5">
+</head>
+<body>
+<a class="skip" href="#main">本文へ移動</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="./">ワーク用ページ</a>
+    <nav aria-label="ページの切り替え">
+      <a href="./">はじめに</a>
+      <a href="mail.html">ワーク1 お願いメール</a>
+      <a href="memo.html" aria-current="page">ワーク2 事業所メモ</a>
+    </nav>
+  </div>
+</header>
+
+<nav class="stepnav" aria-label="ステップの一覧">
+  <div class="wrap">
+    <span class="label">STEP</span>
+    <ol>
+      <li><a href="#m1" aria-label="ステップ1">1</a></li>
+      <li><a href="#m2" aria-label="ステップ2">2</a></li>
+      <li><a href="#m3" aria-label="ステップ3">3</a></li>
+      <li><a href="#more" aria-label="時間が余った人へ">＋</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <p class="eyebrow">ワーク2</p>
+    <h1>事業所メモ<br>（md ファイル）を作る</h1>
+    <p class="lead">事業所の情報をファイルにして、AIに読ませます。そうすると、毎回、背景をチャットに貼らなくてよくなります。</p>
+
+    <div class="notice" role="note">
+      <strong>入れてよいのは、このページのダミーだけです</strong>
+      <p>実在の利用者さん、職員、事業所の名前、診断名、住所、支援の記録、受給者証の番号は、ファイルにも書きません。</p>
+    </div>
+
+    <p>md（エムディー）ファイルは、見出しの前に <code>#</code> を付けて書いた、ふつうの文字のファイルです。メモ帳で作れます。</p>
+
+    <div class="steps">
+
+      <section class="step" id="m1" aria-labelledby="m1-t">
+        <div class="step-side"><span class="num" aria-hidden="true">01</span><span class="kind">作る</span></div>
+        <div class="step-body">
+          <h2 id="m1-t"><span class="sr">ステップ1　</span>事業所の情報を md にする</h2>
+          <p>メモ帳に貼って、5つの項目の中身を、自分たちで書きます。</p>
+          <figure class="prompt">
+            <figcaption>項目だけの型<button type="button" class="copy" data-copy="skeleton">コピー</button></figcaption>
+            <pre class="text" id="skeleton"># 事業所メモ（ダミー）
+## 事業所の種類
+## 作業や支援
+## 大事な言葉
+## 使わない言葉
+## 文の長さ</pre>
+          </figure>
+          <p class="look">メモ帳に貼り、中身を書いて、.md か .txt で保存します。下書きをAIに書かせたときは、人が直してから保存します。</p>
+
+          <details class="help">
+            <summary>書くのがむずかしいとき：見本のファイルを使う</summary>
+            <div class="body">
+              <p>中身の入った見本です。そのまま使えます。ダミーなので、実在の人や事業所の情報は入っていません。</p>
+              <ul class="files">
+                <li><div><b>見本（.md）</b><span>ふつうはこちらです。</span></div><a class="btn btn--dl" href="files/jigyosho-memo.md" download="事業所メモ_見本.md">ダウンロード</a></li>
+                <li><div><b>見本（.txt）</b><span>.md が付けられないときは、こちらです。</span></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo.txt" download="事業所メモ_見本.txt">ダウンロード</a></li>
+              </ul>
+              <p class="note">ダウンロードしたファイルは、パソコンの「ダウンロード」フォルダに入ります。</p>
+              <figure class="prompt">
+                <figcaption>見本の中身<button type="button" class="copy" data-copy="memo-full">コピー</button></figcaption>
+                <pre class="text" id="memo-full">
+# 事業所メモ（研修用のダミー）
+
+このファイルは研修用のダミーです。実在の利用者、職員、事業所ではありません。名前、年齢、診断名、住所、支援記録、受給者証の番号は書きません。計画の原案にはしません。
+
+## 事業所の種類
+
+- 就労継続支援B型
+- 今日の作業は台の上の品を袋に入れること
+
+## 作業や支援の内容
+
+- 作業A（袋詰め）
+- 袋1つに10個入れる
+- 袋の口は2回折る
+- 終わった袋は箱に入れ、数を紙に書く
+
+## 大事にしている言葉づかい
+
+- です・ますで書く
+- 短い文にする
+- 具体物の名前だけを使う
+
+## 使わない言葉
+
+- 専門用語
+- 作業中の写真の話
+
+## 文の長さの好み
+
+- 手順は3つまで
+- 各手順は1文
+</pre>
+              </figure>
+            </div>
+          </details>
+
+          <details class="help">
+            <summary>メモ帳で保存するしかた</summary>
+            <div class="body">
+              <ol class="plain">
+                <li>メモ帳を開き、コピーした文を貼り付けます（Ctrl を押しながら V）。</li>
+                <li>左上の「ファイル」から「名前を付けて保存」を選びます。</li>
+                <li>ファイル名を「事業所メモ.md」のように、最後を <code>.md</code> にします。</li>
+                <li>「ファイルの種類」を「すべてのファイル」にして、保存します。</li>
+              </ol>
+              <p>むずかしければ、最後を <code>.txt</code> にしても大丈夫です。保存した場所は、あとでチャットに付けるときに使います。</p>
+            </div>
+          </details>
+
+          <p class="next"><a href="#m2">つぎのステップへ</a></p>
+        </div>
+      </section>
+
+      <section class="step" id="m2" aria-labelledby="m2-t">
+        <div class="step-side"><span class="num" aria-hidden="true">02</span><span class="kind">貼る</span></div>
+        <div class="step-body">
+          <h2 id="m2-t"><span class="sr">ステップ2　</span>問いは短く書く</h2>
+          <p>保存したファイルを、AIのチャットに付けます。そのあと、次の文だけを送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているからです。</p>
+          <figure class="prompt">
+            <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q1">コピー</button></figcaption>
+            <p class="text" id="q1">初めての人にも分かる手順を、3つで書いてください。</p>
+          </figure>
+          <p class="look">問いに書いていないのに、「10個」や「2回折る」が出てくるかを見ます。出てくれば、ファイルが読めています。</p>
+
+          <details class="help">
+            <summary>ファイルが読めていないとき、付けられないとき</summary>
+            <div class="body">
+              <p>出てこないときは、ファイルをもう一度付けて、同じ問いを送ります。問いに材料を書き足して、埋め合わせないでください。</p>
+              <p>付けるボタンが見当たらないときは、見本の中身と問いを、続けて貼ります。次のボタンで、2つがいっしょにコピーされます。</p>
+              <span id="q-with-memo" hidden>このメモを読んだうえで、初めての人にも分かる手順を、3つで書いてください。</span>
+              <button type="button" class="copy wide" data-copy="memo-full q-with-memo">見本の中身と問いを、いっしょにコピー</button>
+            </div>
+          </details>
+
+          <p class="next"><a href="#m3">つぎのステップへ</a></p>
+        </div>
+      </section>
+
+      <section class="step" id="m3" aria-labelledby="m3-t">
+        <div class="step-side"><span class="num" aria-hidden="true">03</span><span class="kind">足す</span></div>
+        <div class="step-body">
+          <h2 id="m3-t"><span class="sr">ステップ3　</span>足りない点は md に足す</h2>
+          <p>出てきた文を見て、直したいところを探します。たとえば、長いことや、言葉づかいがファイルと違うことです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
+          <ol class="plain">
+            <li>ファイルをメモ帳で開き、「文の長さの好み」の下に、次の1行を足します。</li>
+            <li>上書き保存します。</li>
+            <li>同じファイルと、同じ問いを、もう一度送ります。</li>
+          </ol>
+          <figure class="prompt">
+            <figcaption>ファイルに足す1行<button type="button" class="copy" data-copy="add1">コピー</button></figcaption>
+            <p class="text" id="add1">- 1文は20字まで</p>
+          </figure>
+          <p class="look">同じファイルと同じ問いで、文が短くなったかを見ます。直すのは1回です。「短くして」とプロンプトに足さず、ファイルに足します。</p>
+
+          <details class="help">
+            <summary>ファイルを直すのがむずかしいとき：1行を足した見本を使う</summary>
+            <div class="body">
+              <p>見本に、この1行を足したものです。保存したファイルの代わりに、チャットに付けます。</p>
+              <ul class="files">
+                <li><div><b>1行を足した見本（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_見本_20字.md">ダウンロード</a></li>
+                <li><div><b>1行を足した見本（.txt）</b></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo-20ji.txt" download="事業所メモ_見本_20字.txt">ダウンロード</a></li>
+              </ul>
+            </div>
+          </details>
+        </div>
+      </section>
+
+    </div>
+
+    <div class="finish">
+      <h2>ワーク2はここまでです</h2>
+      <p>背景をファイルにしておくと、問いが短くなり、直す場所もファイルの1か所に決まります。</p>
+      <p>次のチャットでも同じ背景を使いたいときは、同じファイルをもう一度付けます。</p>
+      <p>会場のパソコンは練習用の共有です。ワークが終わったら、今日のチャットを消してください。</p>
+    </div>
+
+    <section id="more" style="margin-top:56px;" aria-labelledby="more-t">
+      <p class="section-title">時間が余った人へ</p>
+      <h2 id="more-t">やってみたいものを、1つ選んでください</h2>
+
+      <h3 style="margin-top:20px;">問いを変えてみる</h3>
+      <ul class="plain">
+        <li>相手を変えて、同じお知らせを保護者向けに頼み直し、言葉づかいの違いを見ます。</li>
+        <li>返ってきた文を声に出して読み、30秒で読み終わるかを計ります。長ければ「短くして」と1行足します。</li>
+        <li>返ってきた文のうち、利用者さんが聞き返しそうな言葉を、1つ書き出します。</li>
+      </ul>
+
+      <h3 style="margin-top:20px;">材料（ファイルの中身）を変えてみる</h3>
+      <ul class="plain">
+        <li>背景を1行ずつ消して送り直し、どの行が無いと困るかを見ます。</li>
+        <li>返ってきた手順のうち、材料に書いていない文を1つ探します。AIが足した文か、材料から来た文かを分けます。</li>
+        <li>自分の職場の言葉に言い換えるときは、個人が特定される文が混ざらないかを、送る前に声に出して確かめます。実名や記録は入れません。</li>
+      </ul>
+    </section>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>2026年11月27日 福祉事業所のAI導入と活用セミナー ワーク用ページ</p>
+    <p>このページの文章とファイルは、研修用のダミーです。</p>
+  </div>
+</footer>
+
+<div id="live" class="sr" aria-live="polite" role="status"></div>
+<div id="toast" class="toast" aria-hidden="true"></div>
+<script src="assets/script.js?v=5"></script>
+</body>
+</html>
