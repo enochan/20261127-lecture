@@ -151,10 +151,26 @@
     var backBtn = document.createElement('button');
     backBtn.type = 'button';
     backBtn.className = 'btn btn--ghost btn--back';
-    backBtn.textContent = '前のステップ';
+    backBtn.setAttribute('aria-keyshortcuts', 'ArrowLeft');
+    var backKey = document.createElement('kbd');
+    backKey.className = 'key';
+    backKey.setAttribute('aria-hidden', 'true');
+    backKey.textContent = '←';
+    var backLbl = document.createElement('span');
+    backLbl.textContent = '前のステップ';
+    backBtn.appendChild(backKey);
+    backBtn.appendChild(backLbl);
     var nextBtn = document.createElement('button');
     nextBtn.type = 'button';
     nextBtn.className = 'btn btn--go';
+    nextBtn.setAttribute('aria-keyshortcuts', 'ArrowRight');
+    var nextLbl = document.createElement('span');
+    var nextKey = document.createElement('kbd');
+    nextKey.className = 'key';
+    nextKey.setAttribute('aria-hidden', 'true');
+    nextKey.textContent = '→';
+    nextBtn.appendChild(nextLbl);
+    nextBtn.appendChild(nextKey);
     inner.appendChild(backBtn);
     inner.appendChild(nextBtn);
     stepbar.appendChild(inner);
@@ -187,36 +203,93 @@
 
     var current = -1;
 
-    // 画面が変わったとき、そのステップでまず押すものを一度だけ光らせる。
-    // 見つかる順は、表示されているコピーのボタン → 確認ポイント → 開く欄（summary）→ 次へのボタン。
-    var spotEl = null;
-    // 指定した要素だけを光らせる（前に光っていたものは外す）
-    function setSpot(el) {
-      if (spotEl) { spotEl.classList.remove('is-spotlight'); spotEl = null; }
-      if (!el || el.hidden) { return; }
-      el.classList.remove('is-spotlight');
-      void el.offsetWidth; // アニメーションを最初から動かし直す
-      el.classList.add('is-spotlight');
-      // 次の画面に移るまで枠線を動かし続ける（次の画面に移るとき、setSpot() の先頭で外す）
-      spotEl = el;
+    // 画面が変わるたびに、そのステップで押す順に、枠線を動かして示す。
+    // 順番は、ステップの種類で決める。段階が終わると、枠線は次の段階に移る。
+    //   はじめ（ワーク1）: Gemini のリンクを押す → 「はじめる」
+    //   はじめ（ワーク2）: 「はじめる」
+    //   ダウンロードのステップ: ダウンロードのボタンを押す → 次へ
+    //   貼るステップ: コピーのボタンを押して成功する（複数あれば全部を示す）→ 次へ
+    //   確かめるステップ: 確認ポイントを示す → 8秒たったら次へ
+    //   完了: 次の案内のボタン、なければ「時間が余った人へ」の欄
+    var spotEls = [];
+    var flow = [];
+    var flowAt = 0;
+    var flowTimer = null;
+    var LOOK_WAIT = 8000;
+
+    function visible(el) { return !!el && !el.hidden && el.getClientRects().length > 0; }
+
+    // 折りたたみの中にあるものは、順番に入れない（開いていない間は見えないため）
+    function pick(panel, selector) {
+      return Array.prototype.slice.call(panel.querySelectorAll(selector)).filter(function (e) {
+        return visible(e) && !e.closest('details');
+      });
     }
 
-    function spotlight(panel) {
-      var el = null;
-      var copies = Array.prototype.slice.call(panel.querySelectorAll('[data-copy]'));
-      for (var c = 0; c < copies.length && !el; c++) {
-        if (copies[c].getClientRects().length > 0) { el = copies[c]; }
+    function setSpots(els) {
+      spotEls.forEach(function (e) { e.classList.remove('is-spotlight'); });
+      spotEls = els.filter(visible);
+      void document.body.offsetWidth; // アニメーションを最初から動かし直す
+      spotEls.forEach(function (e) { e.classList.add('is-spotlight'); });
+    }
+
+    function showStage() {
+      window.clearTimeout(flowTimer);
+      var stage = flow[flowAt];
+      setSpots(stage ? stage.els : []);
+      if (stage && stage.on === 'wait' && flow[flowAt + 1]) {
+        flowTimer = window.setTimeout(advance, LOOK_WAIT);
       }
-      if (!el) { el = panel.querySelector('.look'); }
-      if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.help summary'); }
-      if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.btn-row .btn'); }
-      if (!el || el.getClientRects().length === 0) { el = nextBtn; }
-      setSpot(el);
     }
 
-    // コピーに成功したら、次へのボタンを光らせる（コピーの処理は下の click の中で知らせる）
+    function advance() {
+      if (flowAt < flow.length) { flowAt++; }
+      showStage();
+    }
+
+    function startFlow(panel, isDone) {
+      var stages = [];
+      var intro = panel.classList.contains('step--intro');
+      var links = pick(panel, '.btn-row .btn');
+      var downloads = pick(panel, 'a[download]');
+      var copies = pick(panel, '[data-copy]');
+      var looks = pick(panel, '.look');
+
+      if (intro) {
+        if (links.length) { stages.push({ els: links, on: 'click' }); }
+      } else if (isDone) {
+        if (links.length) {
+          stages.push({ els: links, on: 'click' });
+        } else {
+          var more = panel.querySelector('.help summary');
+          if (visible(more)) { stages.push({ els: [more], on: 'click' }); }
+        }
+      } else if (downloads.length) {
+        stages.push({ els: downloads, on: 'click' });
+      } else if (copies.length) {
+        stages.push({ els: copies, on: 'copy' });
+      } else if (looks.length) {
+        stages.push({ els: looks, on: 'wait' });
+      }
+      if (!isDone && !nextBtn.hidden) { stages.push({ els: [nextBtn], on: 'end' }); }
+
+      flow = stages;
+      flowAt = 0;
+      showStage();
+    }
+
+    // 順番の途中にあるものを押したら、次の段階に移る
+    document.addEventListener('click', function (event) {
+      var stage = flow[flowAt];
+      if (!stage || stage.on !== 'click') { return; }
+      for (var k = 0; k < stage.els.length; k++) {
+        if (stage.els[k].contains(event.target)) { advance(); return; }
+      }
+    });
+    // コピーに成功したら、次の段階に移る（成功の合図は、上のコピーの処理から届く）
     document.addEventListener('stepcopied', function () {
-      setSpot(nextBtn.hidden ? null : nextBtn);
+      var stage = flow[flowAt];
+      if (stage && stage.on === 'copy') { advance(); }
     });
 
     function show(i, userMove) {
@@ -237,9 +310,11 @@
 
       backBtn.hidden = (i === 0);
       nextBtn.hidden = (i >= panels.length - 1);
-      nextBtn.textContent = nextLabelOf(i);
+      nextLbl.textContent = nextLabelOf(i);
 
       if (main) { main.scrollTop = 0; }
+
+      startFlow(panels[i], onDone);
 
       var heading = panels[i].querySelector('h1, h2');
       if (userMove) {
@@ -247,7 +322,6 @@
           heading.setAttribute('tabindex', '-1');
           heading.focus({ preventScroll: true });
         }
-        spotlight(panels[i]);
         if (live) {
           live.textContent = '';
           window.setTimeout(function () {
