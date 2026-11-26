@@ -100,6 +100,7 @@
             heading.setAttribute('tabindex', '-1');
             heading.focus({ preventScroll: true });
           }
+          document.dispatchEvent(new Event('stepcopied'));
         }
       } else {
         btn.textContent = 'コピーできませんでした';
@@ -189,8 +190,18 @@
     // 画面が変わったとき、そのステップでまず押すものを一度だけ光らせる。
     // 見つかる順は、表示されているコピーのボタン → 確認ポイント → 開く欄（summary）→ 次へのボタン。
     var spotEl = null;
-    function spotlight(panel) {
+    // 指定した要素だけを光らせる（前に光っていたものは外す）
+    function setSpot(el) {
       if (spotEl) { spotEl.classList.remove('is-spotlight'); spotEl = null; }
+      if (!el || el.hidden) { return; }
+      el.classList.remove('is-spotlight');
+      void el.offsetWidth; // アニメーションを最初から動かし直す
+      el.classList.add('is-spotlight');
+      // 次の画面に移るまで枠線を動かし続ける（次の画面に移るとき、setSpot() の先頭で外す）
+      spotEl = el;
+    }
+
+    function spotlight(panel) {
       var el = null;
       var copies = Array.prototype.slice.call(panel.querySelectorAll('[data-copy]'));
       for (var c = 0; c < copies.length && !el; c++) {
@@ -200,17 +211,13 @@
       if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.help summary'); }
       if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.btn-row .btn'); }
       if (!el || el.getClientRects().length === 0) { el = nextBtn; }
-      if (!el || el.hidden) { return; }
-      el.classList.remove('is-spotlight');
-      void el.offsetWidth; // アニメーションを最初から動かし直す
-      el.classList.add('is-spotlight');
-      spotEl = el;
-      el.addEventListener('animationend', function done() {
-        el.removeEventListener('animationend', done);
-        el.classList.remove('is-spotlight');
-        if (spotEl === el) { spotEl = null; }
-      });
+      setSpot(el);
     }
+
+    // コピーに成功したら、次へのボタンを光らせる（コピーの処理は下の click の中で知らせる）
+    document.addEventListener('stepcopied', function () {
+      setSpot(nextBtn.hidden ? null : nextBtn);
+    });
 
     function show(i, userMove) {
       current = i;
