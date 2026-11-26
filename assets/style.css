@@ -141,14 +141,6 @@ html.js-steps .prompt-grid .copy { min-height: 36px; padding: 4px 10px; font-siz
 /* 確認ポイント。資料（スライド）の「確認」の印と同じ、緑の丸い札 */
 .look::before { content: "確認"; display: inline-block; font-size: 14px; font-weight: 700; letter-spacing: 0.15em; color: #fff; background: var(--accent); border-radius: 999px; padding: 2px 12px; margin-right: 12px; vertical-align: 2px; }
 
-/* 画面が変わったとき、押すものの周りに太い枠線を出し、次の画面に移るまで脈打たせる。
-   外に出る幅は、枠線の太さ3pxとあわせて最大6px。まわりの余白（最小6px）から出ない */
-.is-spotlight { outline: 3px solid var(--accent); outline-offset: 0; animation: spotlight 7s ease-in-out infinite; }
-@keyframes spotlight {
-  0%, 100% { outline-color: var(--accent); outline-offset: 0; }
-  50% { outline-color: rgba(63, 107, 15, 0.35); outline-offset: 3px; }
-}
-
 .next { margin: 18px 0 0; font-size: 15px; }
 .next a { color: var(--muted); }
 .next a:hover { color: var(--accent); }
@@ -328,9 +320,7 @@ html.js-steps .finish h2 { font-size: 22px; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .toast, .entry-list a, .copy, .btn, .progress span { transition: none; }
-  .is-spotlight { animation: none; outline: 2px solid var(--accent); outline-offset: 4px; }
-}
+  .toast, .entry-list a, .copy, .btn, .progress span { transition: none; }}
 
 @media print {
   .stepnav, .copy, .btn, .top nav, .toast { display: none !important; }

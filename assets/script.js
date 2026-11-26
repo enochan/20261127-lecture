@@ -100,7 +100,6 @@
             heading.setAttribute('tabindex', '-1');
             heading.focus({ preventScroll: true });
           }
-          document.dispatchEvent(new Event('stepcopied'));
         }
       } else {
         btn.textContent = 'コピーできませんでした';
@@ -203,86 +202,6 @@
 
     var current = -1;
 
-    // 画面が変わるたびに、そのステップで押す順に、枠線を動かして示す。
-    // 順番は、ステップの種類で決める。段階が終わると、枠線は次の段階に移る。
-    //   はじめ（ワーク1）: Gemini のリンクを押す → 「はじめる」
-    //   はじめ（ワーク2）: 「はじめる」
-    //   ダウンロードのステップ: ダウンロードのボタンを押す → 次へ
-    //   貼るステップ: コピーのボタンを押して成功する（複数あれば全部を示す）→ 次へ
-    //   確かめるステップ: 次へ（確認ポイントはボタンではないので光らせない）
-    //   完了: 次の案内のボタン、なければ「時間が余った人へ」の欄
-    var spotEls = [];
-    var flow = [];
-    var flowAt = 0;
-
-    function visible(el) { return !!el && !el.hidden && el.getClientRects().length > 0; }
-
-    // 折りたたみの中にあるものは、順番に入れない（開いていない間は見えないため）
-    function pick(panel, selector) {
-      return Array.prototype.slice.call(panel.querySelectorAll(selector)).filter(function (e) {
-        return visible(e) && !e.closest('details');
-      });
-    }
-
-    function setSpots(els) {
-      spotEls.forEach(function (e) { e.classList.remove('is-spotlight'); });
-      spotEls = els.filter(visible);
-      void document.body.offsetWidth; // アニメーションを最初から動かし直す
-      spotEls.forEach(function (e) { e.classList.add('is-spotlight'); });
-    }
-
-    function showStage() {
-      var stage = flow[flowAt];
-      setSpots(stage ? stage.els : []);
-    }
-
-    function advance() {
-      if (flowAt < flow.length) { flowAt++; }
-      showStage();
-    }
-
-    function startFlow(panel, isDone) {
-      var stages = [];
-      var intro = panel.classList.contains('step--intro');
-      var links = pick(panel, '.btn-row .btn');
-      var downloads = pick(panel, 'a[download]');
-      var copies = pick(panel, '[data-copy]');
-
-      if (intro) {
-        if (links.length) { stages.push({ els: links, on: 'click' }); }
-      } else if (isDone) {
-        if (links.length) {
-          stages.push({ els: links, on: 'click' });
-        } else {
-          var more = panel.querySelector('.help summary');
-          if (visible(more)) { stages.push({ els: [more], on: 'click' }); }
-        }
-      } else if (downloads.length) {
-        stages.push({ els: downloads, on: 'click' });
-      } else if (copies.length) {
-        stages.push({ els: copies, on: 'copy' });
-      }
-      if (!isDone && !nextBtn.hidden) { stages.push({ els: [nextBtn], on: 'end' }); }
-
-      flow = stages;
-      flowAt = 0;
-      showStage();
-    }
-
-    // 順番の途中にあるものを押したら、次の段階に移る
-    document.addEventListener('click', function (event) {
-      var stage = flow[flowAt];
-      if (!stage || stage.on !== 'click') { return; }
-      for (var k = 0; k < stage.els.length; k++) {
-        if (stage.els[k].contains(event.target)) { advance(); return; }
-      }
-    });
-    // コピーに成功したら、次の段階に移る（成功の合図は、上のコピーの処理から届く）
-    document.addEventListener('stepcopied', function () {
-      var stage = flow[flowAt];
-      if (stage && stage.on === 'copy') { advance(); }
-    });
-
     function show(i, userMove) {
       current = i;
       panels.forEach(function (p, k) { p.classList.toggle('is-current', k === i); });
@@ -304,8 +223,6 @@
       nextLbl.textContent = nextLabelOf(i);
 
       if (main) { main.scrollTop = 0; }
-
-      startFlow(panels[i], onDone);
 
       var heading = panels[i].querySelector('h1, h2');
       if (userMove) {
