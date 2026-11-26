@@ -63,9 +63,17 @@
     return parts.join('\n\n');
   }
 
+  // 読み上げの名前は「見た目の文字（コピーしました等）＋元の説明」にして、見た目と一致させる
+  function setButtonName(btn, prefix) {
+    var base = btn.getAttribute('data-aria') || '';
+    btn.setAttribute('aria-label', prefix + base);
+  }
+
   function resetButton(btn) {
     btn.textContent = btn.getAttribute('data-label') || 'コピーする';
     btn.classList.remove('is-copied', 'is-failed');
+    var base = btn.getAttribute('data-aria') || '';
+    if (base) { btn.setAttribute('aria-label', base); } else { btn.removeAttribute('aria-label'); }
   }
 
   document.addEventListener('click', function (event) {
@@ -75,17 +83,20 @@
     var text = collectText(ids);
     if (!text) { return; }
     if (!btn.getAttribute('data-label')) { btn.setAttribute('data-label', btn.textContent.trim()); }
+    if (!btn.hasAttribute('data-aria')) { btn.setAttribute('data-aria', btn.getAttribute('aria-label') || ''); }
     copyText(text).then(function (ok) {
       window.clearTimeout(btn._timer);
       if (ok) {
         btn.textContent = 'コピーしました';
         btn.classList.remove('is-failed');
         btn.classList.add('is-copied');
+        setButtonName(btn, 'コピーしました。');
         announce('コピーしました。AIの入力欄に貼り付けてください。');
       } else {
         btn.textContent = 'コピーできませんでした';
         btn.classList.remove('is-copied');
         btn.classList.add('is-failed');
+        setButtonName(btn, 'コピーできませんでした。');
         var first = document.getElementById(ids.split(/\s+/)[0]);
         if (first) { selectElementText(first); }
         announce('コピーできませんでした。選んだ文を Ctrl と C で、手でコピーしてください。');

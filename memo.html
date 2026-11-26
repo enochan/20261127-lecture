@@ -7,8 +7,8 @@
 <title>ワーク2 事業所メモ（md ファイル）｜福祉事業所のAI導入と活用セミナー</title>
 <meta name="description" content="事業所の情報をファイルにしてAIに読ませるワークの、ファイルのダウンロードと文章のコピーができます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=15">
-<link rel="stylesheet" href="assets/style.css?v=16">
+<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=18">
+<link rel="stylesheet" href="assets/style.css?v=20">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -32,7 +32,7 @@
       <li><a href="#m1" aria-label="ステップ1">1</a></li>
       <li><a href="#m2" aria-label="ステップ2">2</a></li>
       <li><a href="#m3" aria-label="ステップ3">3</a></li>
-      <li><a href="#done" aria-label="ワーク2の終わりと、時間が余った人へ">完了</a></li>
+      <li><a href="#done" aria-label="完了（ワーク2の終わりと、時間が余った人へ）">完了</a></li>
     </ol>
   </div>
 </nav>
@@ -71,7 +71,7 @@
             <div class="body">
               <p>見出しの前に <code>#</code> が付いた、ふつうの文字のファイルです。5つの項目（事業所の種類、作業や支援の内容、大事にしている言葉づかい、使わない言葉、文の長さの好み）が入っています。</p>
               <figure class="prompt">
-                <figcaption>ファイルの中身<button type="button" class="copy" data-copy="memo-full">コピー</button></figcaption>
+                <figcaption>ファイルの中身<button type="button" class="copy" data-copy="memo-full" aria-label="「ファイルの中身」をコピー">コピー</button></figcaption>
                 <pre class="text" id="memo-full">
 # 事業所メモ（研修用のダミー）
 
@@ -126,7 +126,7 @@
           <h2 id="m2-t"><span class="sr">ステップ2　</span>問いは短く書く</h2>
           <p>ダウンロードしたファイルを、AIのチャットに付けます。そのあと、次の文だけを送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているからです。</p>
           <figure class="prompt">
-            <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q1">コピー</button></figcaption>
+            <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q1" aria-label="「初めての人にも分かる手順を、3つで書…」をコピー">コピー</button></figcaption>
             <p class="text" id="q1">初めての人にも分かる手順を、3つで書いてください。</p>
           </figure>
           <p class="look">問いに書いていないのに、「10個」や「2回折る」が出てくるかを見ます。出てくれば、ファイルが読めています。</p>
@@ -155,7 +155,7 @@
             <li><div><b>1行を足した事業所メモ（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_20字.md">ダウンロード</a></li>
           </ul>
           <figure class="prompt">
-            <figcaption>ファイルに足した1行<button type="button" class="copy" data-copy="add1">コピー</button></figcaption>
+            <figcaption>ファイルに足した1行<button type="button" class="copy" data-copy="add1" aria-label="「- 1文は20字まで」をコピー">コピー</button></figcaption>
             <p class="text" id="add1">- 1文は20字まで</p>
           </figure>
           <p class="look">同じ問いで、文が短くなったかを見ます。直すのは1回です。「短くして」とプロンプトに足さず、ファイルに足します。</p>
@@ -199,13 +199,14 @@
 
 <footer class="foot">
   <div class="wrap">
-    <p>2026年11月27日 福祉事業所のAI導入と活用セミナー AIレクチャーワーク用ページ</p>
-    <p>このページの文章とファイルは、研修用のダミーです。</p>
+    <p class="foot-info">2026年11月27日 福祉事業所のAI導入と活用セミナー AIレクチャーワーク用ページ</p>
+    <p class="foot-info">このページの文章とファイルは、研修用のダミーです。</p>
+    <p class="copyright">© LITALICO 2026</p>
   </div>
 </footer>
 
 <div id="live" class="sr" aria-live="polite" role="status"></div>
 <div id="toast" class="toast" aria-hidden="true"></div>
-<script src="assets/script.js?v=15"></script>
+<script src="assets/script.js?v=18"></script>
 </body>
 </html>
