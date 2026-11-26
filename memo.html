@@ -7,8 +7,8 @@
 <title>ワーク2 事業所メモ（md ファイル）｜福祉事業所のAI導入と活用セミナー</title>
 <meta name="description" content="事業所の情報をファイルにしてAIに読ませるワークの、ファイルのダウンロードと文章のコピーができます。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%233f6b0f'/%3E%3Cpath d='M18 33l10 10 18-22' fill='none' stroke='white' stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=7">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/fonts/noto-sans-jp.css?v=8">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <a class="skip" href="#main">本文へ移動</a>
@@ -39,7 +39,7 @@
 <main id="main">
   <div class="wrap">
     <p class="eyebrow">ワーク2</p>
-    <h1>事業所メモ<br>（md ファイル）を作る</h1>
+    <h1>事業所メモ<br>（md ファイル）を使う</h1>
     <p class="lead">事業所の情報をファイルにして、AIに読ませます。そうすると、毎回、背景をチャットに貼らなくてよくなります。</p>
 
     <div class="notice" role="note">
@@ -47,37 +47,27 @@
       <p>実在の利用者さん、職員、事業所の名前、診断名、住所、支援の記録、受給者証の番号は、ファイルにも書きません。</p>
     </div>
 
-    <p>md（エムディー）ファイルは、見出しの前に <code>#</code> を付けて書いた、ふつうの文字のファイルです。メモ帳で作れます。</p>
+    <p>md（エムディー）ファイルは、見出しの前に <code>#</code> を付けて書いた、ふつうの文字のファイルです。</p>
 
     <div class="steps">
 
       <section class="step" id="m1" aria-labelledby="m1-t">
-        <div class="step-side"><span class="num" aria-hidden="true">01</span><span class="kind">作る</span></div>
+        <div class="step-side"><span class="num" aria-hidden="true">01</span><span class="kind">ダウンロード</span></div>
         <div class="step-body">
-          <h2 id="m1-t"><span class="sr">ステップ1　</span>事業所の情報を md にする</h2>
-          <p>メモ帳に貼って、5つの項目の中身を、自分たちで書きます。</p>
-          <figure class="prompt">
-            <figcaption>項目だけの型<button type="button" class="copy" data-copy="skeleton">コピー</button></figcaption>
-            <pre class="text" id="skeleton"># 事業所メモ（ダミー）
-## 事業所の種類
-## 作業や支援
-## 大事な言葉
-## 使わない言葉
-## 文の長さ</pre>
-          </figure>
-          <p class="look">メモ帳に貼り、中身を書いて、.md か .txt で保存します。下書きをAIに書かせたときは、人が直してから保存します。</p>
+          <h2 id="m1-t"><span class="sr">ステップ1　</span>事業所メモのファイルをダウンロードする</h2>
+          <p>事業所の情報が入った md ファイルを、あらかじめ用意しています。次のボタンを押して、パソコンに保存します。</p>
+          <ul class="files">
+            <li><div><b>事業所メモ（.md）</b><span>ふつうはこちらです。</span></div><a class="btn btn--dl" href="files/jigyosho-memo.md" download="事業所メモ.md">ダウンロード</a></li>
+            <li><div><b>事業所メモ（.txt）</b><span>AIに付けられないときは、こちらです。</span></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo.txt" download="事業所メモ.txt">ダウンロード</a></li>
+          </ul>
+          <p class="look">ダウンロードしたファイルは、パソコンの「ダウンロード」フォルダに入ります。ダミーなので、実在の人や事業所の情報は入っていません。</p>
 
           <details class="help">
-            <summary>書くのがむずかしいとき：見本のファイルを使う</summary>
+            <summary>ファイルの中身を見る</summary>
             <div class="body">
-              <p>中身の入った見本です。そのまま使えます。ダミーなので、実在の人や事業所の情報は入っていません。</p>
-              <ul class="files">
-                <li><div><b>見本（.md）</b><span>ふつうはこちらです。</span></div><a class="btn btn--dl" href="files/jigyosho-memo.md" download="事業所メモ_見本.md">ダウンロード</a></li>
-                <li><div><b>見本（.txt）</b><span>.md が付けられないときは、こちらです。</span></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo.txt" download="事業所メモ_見本.txt">ダウンロード</a></li>
-              </ul>
-              <p class="note">ダウンロードしたファイルは、パソコンの「ダウンロード」フォルダに入ります。</p>
+              <p>見出しの前に <code>#</code> が付いた、ふつうの文字のファイルです。5つの項目（事業所の種類、作業や支援の内容、大事にしている言葉づかい、使わない言葉、文の長さの好み）が入っています。</p>
               <figure class="prompt">
-                <figcaption>見本の中身<button type="button" class="copy" data-copy="memo-full">コピー</button></figcaption>
+                <figcaption>ファイルの中身<button type="button" class="copy" data-copy="memo-full">コピー</button></figcaption>
                 <pre class="text" id="memo-full">
 # 事業所メモ（研修用のダミー）
 
@@ -116,15 +106,9 @@
           </details>
 
           <details class="help">
-            <summary>メモ帳で保存するしかた</summary>
+            <summary>ダウンロードできないとき</summary>
             <div class="body">
-              <ol class="plain">
-                <li>メモ帳を開き、コピーした文を貼り付けます（Ctrl を押しながら V）。</li>
-                <li>左上の「ファイル」から「名前を付けて保存」を選びます。</li>
-                <li>ファイル名を「事業所メモ.md」のように、最後を <code>.md</code> にします。</li>
-                <li>「ファイルの種類」を「すべてのファイル」にして、保存します。</li>
-              </ol>
-              <p>むずかしければ、最後を <code>.txt</code> にしても大丈夫です。保存した場所は、あとでチャットに付けるときに使います。</p>
+              <p>ボタンを押しても保存されないときは、上の「ファイルの中身」の「コピー」を押し、メモ帳に貼り付けて、「名前を付けて保存」で保存します。ファイル名の最後は <code>.md</code> か <code>.txt</code> にします。</p>
             </div>
           </details>
 
@@ -136,7 +120,7 @@
         <div class="step-side"><span class="num" aria-hidden="true">02</span><span class="kind">貼る</span></div>
         <div class="step-body">
           <h2 id="m2-t"><span class="sr">ステップ2　</span>問いは短く書く</h2>
-          <p>保存したファイルを、AIのチャットに付けます。そのあと、次の文だけを送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているからです。</p>
+          <p>ダウンロードしたファイルを、AIのチャットに付けます。そのあと、次の文だけを送ります。<strong>背景は、問いに書きません。</strong>ファイルに入っているからです。</p>
           <figure class="prompt">
             <figcaption>AIに送る文（ファイルを付けてから）<button type="button" class="copy" data-copy="q1">コピー</button></figcaption>
             <p class="text" id="q1">初めての人にも分かる手順を、3つで書いてください。</p>
@@ -147,9 +131,9 @@
             <summary>ファイルが読めていないとき、付けられないとき</summary>
             <div class="body">
               <p>出てこないときは、ファイルをもう一度付けて、同じ問いを送ります。問いに材料を書き足して、埋め合わせないでください。</p>
-              <p>付けるボタンが見当たらないときは、見本の中身と問いを、続けて貼ります。次のボタンで、2つがいっしょにコピーされます。</p>
+              <p>付けるボタンが見当たらないときは、ファイルの中身と問いを、続けて貼ります。次のボタンで、2つがいっしょにコピーされます。</p>
               <span id="q-with-memo" hidden>このメモを読んだうえで、初めての人にも分かる手順を、3つで書いてください。</span>
-              <button type="button" class="copy wide" data-copy="memo-full q-with-memo">見本の中身と問いを、いっしょにコピー</button>
+              <button type="button" class="copy wide" data-copy="memo-full q-with-memo">ファイルの中身と問いを、いっしょにコピー</button>
             </div>
           </details>
 
@@ -162,25 +146,25 @@
         <div class="step-body">
           <h2 id="m3-t"><span class="sr">ステップ3　</span>足りない点は md に足す</h2>
           <p>出てきた文を見て、直したいところを探します。たとえば、長いことや、言葉づかいがファイルと違うことです。<strong>直す場所は、プロンプトではなく、ファイルです。</strong></p>
+          <p>「文の長さの好み」の下に、次の1行を足したファイルを用意しています。ダウンロードして、先ほどのファイルの代わりに、チャットに付けます。</p>
+          <ul class="files">
+            <li><div><b>1行を足した事業所メモ（.md）</b><span>ふつうはこちらです。</span></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_20字.md">ダウンロード</a></li>
+            <li><div><b>1行を足した事業所メモ（.txt）</b><span>AIに付けられないときは、こちらです。</span></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo-20ji.txt" download="事業所メモ_20字.txt">ダウンロード</a></li>
+          </ul>
           <ol class="plain">
-            <li>ファイルをメモ帳で開き、「文の長さの好み」の下に、次の1行を足します。</li>
-            <li>上書き保存します。</li>
-            <li>同じファイルと、同じ問いを、もう一度送ります。</li>
+            <li>上のファイルをダウンロードします。</li>
+            <li>同じ問いを、もう一度送ります。付けるファイルは、さっきのファイルではなく、ダウンロードしたこのファイルです。</li>
           </ol>
           <figure class="prompt">
-            <figcaption>ファイルに足す1行<button type="button" class="copy" data-copy="add1">コピー</button></figcaption>
+            <figcaption>ファイルに足した1行<button type="button" class="copy" data-copy="add1">コピー</button></figcaption>
             <p class="text" id="add1">- 1文は20字まで</p>
           </figure>
-          <p class="look">同じファイルと同じ問いで、文が短くなったかを見ます。直すのは1回です。「短くして」とプロンプトに足さず、ファイルに足します。</p>
+          <p class="look">同じ問いで、文が短くなったかを見ます。直すのは1回です。「短くして」とプロンプトに足さず、ファイルに足します。</p>
 
           <details class="help">
-            <summary>ファイルを直すのがむずかしいとき：1行を足した見本を使う</summary>
+            <summary>自分でファイルに足すとき</summary>
             <div class="body">
-              <p>見本に、この1行を足したものです。保存したファイルの代わりに、チャットに付けます。</p>
-              <ul class="files">
-                <li><div><b>1行を足した見本（.md）</b></div><a class="btn btn--dl" href="files/jigyosho-memo-20ji.md" download="事業所メモ_見本_20字.md">ダウンロード</a></li>
-                <li><div><b>1行を足した見本（.txt）</b></div><a class="btn btn--ghost btn--dl" href="files/jigyosho-memo-20ji.txt" download="事業所メモ_見本_20字.txt">ダウンロード</a></li>
-              </ul>
+              <p>メモ帳でファイルを開き、「文の長さの好み」の下に、上の1行をコピーして貼ります。上書き保存してから、同じ問いを送ります。</p>
             </div>
           </details>
         </div>
@@ -227,6 +211,6 @@
 
 <div id="live" class="sr" aria-live="polite" role="status"></div>
 <div id="toast" class="toast" aria-hidden="true"></div>
-<script src="assets/script.js?v=7"></script>
+<script src="assets/script.js?v=8"></script>
 </body>
 </html>

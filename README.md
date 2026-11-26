@@ -9,7 +9,7 @@ GitHub Pages で公開しています。ビルドは不要で、HTML と CSS と
 - `index.html` はじめに。使い方3つと、2つのワークへの入口、うまくいかないときの案内
 - `mail.html` ワーク1。取引先へのお願いメール。11のステップ（コピーして貼る6、確かめる5）。ステップは1つずつ表示し、「次のステップへ」で進む
 - `memo.html` ワーク2。事業所メモ（md ファイル）。3つのステップと、時間が余った人への案内
-- `files/` ダウンロード用のファイル。見本の事業所メモ（.md と .txt）と、「1文は20字まで」を足した版
+- `files/` ダウンロード用のファイル。事業所メモ（.md と .txt）と、「1文は20字まで」を足した版。参加者はメモ帳に貼らず、ダウンロードして使う
 - `assets/` 見た目（`style.css`）、コピーのボタン（`script.js`）、フォント（`fonts/`）
 
 ## フォント
@@ -33,7 +33,7 @@ python -m http.server 8000
 
 ## 直すとき
 
-- 文を直したら、`mail.html` や `memo.html` の本文と、`files/` のファイルが食い違わないようにする。特に `memo.html` の「見本の中身」は、`files/jigyosho-memo.md` と同じ文にする
+- 文を直したら、`mail.html` や `memo.html` の本文と、`files/` のファイルが食い違わないようにする。特に `memo.html` の「ファイルの中身」は、`files/jigyosho-memo.md` と同じ文にする
 - CSS や JavaScript を直したら、HTML の `?v=` の番号を上げる（古い版が残らないようにするため）
 
 詳しい設計は [docs/design.md](docs/design.md) にあります。
