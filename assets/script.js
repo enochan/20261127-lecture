@@ -92,6 +92,15 @@
         btn.classList.add('is-copied');
         setButtonName(btn, 'コピーしました。');
         announce('コピーしました。AIの入力欄に貼り付けてください。');
+        // ステップ表示のとき、コピー後はそのステップの見出しに移す（Enter で次へ進めるように）
+        if (document.documentElement.classList.contains('js-steps')) {
+          var section = btn.closest('.step, .done-panel');
+          var heading = section && section.querySelector('h2');
+          if (heading) {
+            heading.setAttribute('tabindex', '-1');
+            heading.focus({ preventScroll: true });
+          }
+        }
       } else {
         btn.textContent = 'コピーできませんでした';
         btn.classList.remove('is-copied');
@@ -177,6 +186,32 @@
 
     var current = -1;
 
+    // 画面が変わったとき、そのステップでまず押すものを一度だけ光らせる。
+    // 見つかる順は、表示されているコピーのボタン → 確認ポイント → 開く欄（summary）→ 次へのボタン。
+    var spotEl = null;
+    function spotlight(panel) {
+      if (spotEl) { spotEl.classList.remove('is-spotlight'); spotEl = null; }
+      var el = null;
+      var copies = Array.prototype.slice.call(panel.querySelectorAll('[data-copy]'));
+      for (var c = 0; c < copies.length && !el; c++) {
+        if (copies[c].getClientRects().length > 0) { el = copies[c]; }
+      }
+      if (!el) { el = panel.querySelector('.look'); }
+      if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.help summary'); }
+      if (!el || el.getClientRects().length === 0) { el = panel.querySelector('.btn-row .btn'); }
+      if (!el || el.getClientRects().length === 0) { el = nextBtn; }
+      if (!el || el.hidden) { return; }
+      el.classList.remove('is-spotlight');
+      void el.offsetWidth; // アニメーションを最初から動かし直す
+      el.classList.add('is-spotlight');
+      spotEl = el;
+      el.addEventListener('animationend', function done() {
+        el.removeEventListener('animationend', done);
+        el.classList.remove('is-spotlight');
+        if (spotEl === el) { spotEl = null; }
+      });
+    }
+
     function show(i, userMove) {
       current = i;
       panels.forEach(function (p, k) { p.classList.toggle('is-current', k === i); });
@@ -205,6 +240,7 @@
           heading.setAttribute('tabindex', '-1');
           heading.focus({ preventScroll: true });
         }
+        spotlight(panels[i]);
         if (live) {
           live.textContent = '';
           window.setTimeout(function () {
@@ -227,5 +263,28 @@
     });
 
     show(indexFromHash(), false);
+
+    // ←→ ↑↓ PageUp PageDown で前後に動く。Enter は次へ進む。
+    // リンク・ボタン・折りたたみ（summary）・入力欄の上では、それぞれ本来の動きに任せる。
+    document.addEventListener('keydown', function (event) {
+      if (event.defaultPrevented || event.altKey || event.ctrlKey || event.metaKey) { return; }
+      var t = event.target;
+      var tag = t && t.tagName ? t.tagName.toLowerCase() : '';
+      if (tag === 'input' || tag === 'select' || tag === 'textarea' || (t && t.isContentEditable)) { return; }
+
+      var move = 0;
+      if (event.key === 'ArrowRight' || event.key === 'ArrowDown' || event.key === 'PageDown') { move = 1; }
+      else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp' || event.key === 'PageUp') { move = -1; }
+      else if (event.key === 'Enter') {
+        if (t && t.closest && t.closest('a, button, summary, label')) { return; }
+        move = 1;
+      }
+      if (!move) { return; }
+
+      var target = current + move;
+      if (target < 0 || target > panels.length - 1) { return; }
+      event.preventDefault();
+      location.hash = panels[target].id;
+    });
   }
 })();
